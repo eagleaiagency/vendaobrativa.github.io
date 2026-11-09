@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><title>Obrativa</title><g transform="translate(-12.42 -12.42) scale(1.097)">
+  
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <path d="M16 64 L16 16 L64 16 L240 16 L240 64 L64 64 L64 160 L16 160 Z" fill="#151515"/>
+      <path d="M192 192 L192 96 L240 96 L240 192 L240 240 L192 240 L16 240 L16 192 Z" fill="#151515"/>
+      <path d="M104 104 L152 104 L152 152 L104 152 Z" fill="#151515"/>
+    </g>
+  </g>
+</g></svg>

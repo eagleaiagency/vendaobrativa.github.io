@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obrativa · Financeiro para empresas de obras e reformas</title>
+<meta name="description" content="Você lança o pagamento uma vez e sabe na hora quanto tem no banco e quanto cada obra recebeu, gastou e ainda tem a receber. Teste grátis por 14 dias.">
+<meta name="theme-color" content="#151515">
+<meta property="og:title" content="Obrativa · Sua empresa sob controle. Cada obra também.">
+<meta property="og:description" content="Um lançamento, dois controles: o caixa da empresa e o financeiro de cada obra, juntos. Para empresas de reforma, manutenção predial e fachadas.">
+<meta property="og:image" content="assets/video-capa.webp">
+<meta property="og:locale" content="pt_BR">
+<script>{ document.documentElement.classList.add('anima'); setTimeout(() => { if (!window.gsap) document.documentElement.classList.remove('anima') }, 3000) }</script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+  font-family: "General Sans";
+  src: url("assets/GeneralSans-Variable.woff2") format("woff2");
+  font-weight: 200 700;
+  font-display: swap;
+}
+
+:root {
+  --amarelo: #ffc21a;
+  --amarelo-pressionado: #f2b200;
+  --amarelo-fundo: #fff4d1;
+  --preto: #151515;
+  --grafite: #2a2926;
+  --grafite-borda: #4a4843;
+  --trilho-texto: #e2ded4;
+  --trilho-suave: #a8a49b;
+  --cal: #f6f3ec;
+  --papel: #ffffff;
+  --papel-2: #faf8f3;
+  --filete: #e6e1d6;
+  --filete-forte: #cfc9bc;
+  --tinta-2: #4d4a44;
+  --tinta-3: #67635c;
+  --terracota: #b5452f;
+  --terracota-fundo: #fbe9e4;
+  --musgo: #3d7a3a;
+  --musgo-fundo: #e7f1e3;
+
+  --sombra-painel: 0 1px 2px rgb(21 21 21 / 0.06), 0 6px 18px -8px rgb(21 21 21 / 0.12);
+  --sombra-tela: 0 2px 4px rgb(21 21 21 / 0.08), 0 40px 80px -40px rgb(21 21 21 / 0.45);
+  --raio: 10px;
+  --raio-campo: 7px;
+  --largura: 1200px;
+  --margem: clamp(16px, 4vw, 40px);
+  --sai: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; scrollbar-color: var(--filete-forte) var(--cal); }
+body {
+  margin: 0;
+  background: var(--cal);
+  color: var(--preto);
+  font-family: "General Sans", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  caret-color: var(--preto);
+}
+::selection { background: var(--amarelo); color: var(--preto); }
+img, video, svg { display: block; max-width: 100%; }
+a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--preto); outline-offset: 3px; border-radius: 4px; }
+.escuro :focus-visible { outline-color: var(--amarelo); }
+h1, h2, h3 { margin: 0; font-weight: 650; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.envelope { width: 100%; max-width: var(--largura); margin: 0 auto; padding: 0 var(--margem); }
+.pular { position: absolute; left: 12px; top: -60px; background: var(--amarelo); color: var(--preto); padding: 10px 14px; border-radius: var(--raio-campo); font-weight: 600; z-index: 100; text-decoration: none; }
+.pular:focus { top: 12px; }
+.icone { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 12px 22px; border-radius: var(--raio-campo);
+  font: inherit; font-size: 16px; font-weight: 600; line-height: 1.2; text-decoration: none; cursor: pointer;
+  border: 1px solid var(--filete-forte); background: var(--papel); color: var(--preto);
+  transition: background-color 160ms var(--sai), border-color 160ms var(--sai), transform 120ms var(--sai);
+  touch-action: manipulation;
+}
+.btn:hover { background: var(--papel-2); border-color: var(--grafite-borda); }
+.btn:active { transform: scale(0.97); }
+.btn.prim { background: var(--amarelo); border-color: var(--amarelo); }
+.btn.prim:hover { background: var(--amarelo-pressionado); border-color: var(--amarelo-pressionado); }
+.btn.preto { background: var(--preto); border-color: var(--preto); color: var(--cal); }
+.btn.preto:hover { background: var(--grafite); border-color: var(--grafite); }
+.btn.fant { border-color: transparent; background: transparent; }
+.btn.fant:hover { background: rgb(21 21 21 / 0.05); border-color: transparent; }
+.escuro .btn.fant { color: var(--cal); }
+.escuro .btn.fant:hover { background: rgb(246 243 236 / 0.08); }
+.btn.peq { min-height: 40px; padding: 8px 16px; font-size: 15px; }
+
+/* Topo */
+.topo { position: sticky; top: 0; z-index: 50; background: rgb(246 243 236 / 0.92); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid transparent; transition: border-color 200ms; }
+.topo.rolou { border-bottom-color: var(--filete); }
+.topo .envelope { display: flex; align-items: center; gap: 28px; height: 68px; }
+.topo .marca img { height: 28px; width: auto; }
+.topo nav { display: flex; gap: 4px; margin-left: 12px; }
+.topo nav a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--tinta-2); padding: 8px 12px; border-radius: var(--raio-campo); }
+.topo nav a:hover { color: var(--preto); background: rgb(21 21 21 / 0.05); }
+.topo .acoes { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* Abertura */
+.abertura { padding: clamp(48px, 8vw, 96px) 0 0; position: relative; }
+.abertura .grade-abertura { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.abertura .texto { max-width: 820px; }
+/* Símbolo em 3D: dois esquadros pretos fecham o quadrado em volta do caixa amarelo */
+.figura { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1; justify-self: end; }
+.figura .cena { position: absolute; inset: 0; perspective: 1200px; perspective-origin: 50% 40%; }
+.figura .chao { position: absolute; left: 18%; right: 18%; bottom: 7%; height: 10%; border-radius: 50%; background: radial-gradient(closest-side, rgb(21 21 21 / 0.24), rgb(21 21 21 / 0)); }
+.simbolo3d, .simbolo3d * { transform-style: preserve-3d; }
+.simbolo3d { position: absolute; left: 50%; top: 46%; width: 0; height: 0; }
+.simbolo3d .giro, .simbolo3d .grupo, .simbolo3d .peca { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.simbolo3d .face { position: absolute; backface-visibility: hidden; }
+.abertura h1 { font-size: clamp(40px, 6.4vw, 80px); line-height: 1.02; letter-spacing: -0.035em; }
+.marcado { background: linear-gradient(var(--amarelo), var(--amarelo)) 0 88% no-repeat; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 0.06em; }
+.abertura .sub { margin-top: 24px; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5; color: var(--tinta-2); max-width: 640px; }
+.abertura .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; align-items: center; }
+.abertura .preco-inicial { margin-top: 16px; font-size: 15px; color: var(--tinta-3); }
+.abertura .preco-inicial b { color: var(--preto); font-weight: 600; }
+.palco-tela { margin-top: clamp(48px, 7vw, 80px); position: relative; z-index: 2; }
+.tela {
+  border-radius: 12px; overflow: hidden; background: var(--papel);
+  border: 1px solid var(--filete); box-shadow: var(--sombra-tela);
+}
+.tela img { width: 100%; height: auto; aspect-ratio: 1600 / 1000; }
+.tela { will-change: auto; }
+.palco-tela .tela { margin-bottom: calc(-1 * clamp(60px, 10vw, 150px)); }
+.publico { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 28px; font-size: 14.5px; color: var(--tinta-3); }
+.publico b { color: var(--tinta-2); font-weight: 600; }
+
+/* Dor (fundo preto) */
+.escuro { background: var(--preto); color: var(--cal); }
+.dor { padding: calc(clamp(60px, 10vw, 150px) + clamp(40px, 6vw, 72px)) 0 clamp(72px, 10vw, 128px); }
+.dor .grade { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(40px, 6vw, 88px); align-items: center; }
+.dor h2 { font-size: clamp(32px, 4.2vw, 52px); line-height: 1.06; letter-spacing: -0.03em; }
+.dor .lead { margin-top: 20px; color: var(--trilho-suave); font-size: 18px; max-width: 520px; }
+.dores { list-style: none; margin: 40px 0 0; padding: 0; border-top: 1px solid var(--grafite-borda); }
+.dores li { padding: 18px 0; border-bottom: 1px solid var(--grafite-borda); display: grid; grid-template-columns: 1fr; gap: 4px; }
+.dores b { font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; letter-spacing: -0.01em; }
+.dores span { color: var(--trilho-suave); font-size: 15.5px; }
+
+/* O mesmo lançamento, duas vezes */
+.duplicado { position: relative; display: grid; gap: 14px; }
+.duplicado .rot { font-size: 13px; font-weight: 600; color: var(--trilho-suave); letter-spacing: 0.02em; }
+.lanc {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 4px 14px; align-items: center;
+  background: var(--papel); color: var(--preto); border-radius: var(--raio); padding: 14px 16px;
+  border: 1px solid var(--filete); box-shadow: var(--sombra-painel); font-size: 15px;
+}
+.lanc .data { font-size: 13px; color: var(--tinta-3); }
+.lanc .quem { font-weight: 600; }
+.lanc .det { grid-column: 2; font-size: 13px; color: var(--tinta-3); }
+.lanc .valor { grid-row: 1 / span 2; grid-column: 3; color: var(--terracota); font-weight: 650; }
+.lanc .ponto { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: 1px; }
+.duplicado .copia { opacity: 0.58; transform: translateX(18px) rotate(-1.2deg); filter: saturate(0.6); }
+.duplicado .copia2 { opacity: 0.32; transform: translateX(36px) rotate(1deg); filter: saturate(0.4); }
+.etiqueta-dup { margin-left: 8px; background: var(--terracota); color: #fff; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+.duplicado-lugar { display: flex; flex-direction: column; gap: 10px; }
+.duplicado-lugar .lugar { display: flex; align-items: center; font-size: 12.5px; color: var(--trilho-suave); font-weight: 600; }
+
+/* Virada (amarelo) */
+.virada { background: var(--amarelo); color: var(--preto); padding: clamp(72px, 10vw, 128px) 0; overflow: hidden; }
+.virada .cab { max-width: 760px; }
+.virada h2 { font-size: clamp(44px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.04em; }
+.virada .cab p { margin-top: 24px; font-size: clamp(18px, 1.6vw, 21px); max-width: 600px; }
+.ramo { margin-top: clamp(48px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr); align-items: center; }
+.ramo .origem .rot, .ramo .destino .rot { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.ramo .origem .lanc { border-color: var(--preto); box-shadow: 0 1px 0 var(--preto), var(--sombra-painel); }
+.ramo svg.linhas { width: 120px; height: 260px; overflow: visible; }
+.ramo .linhas path { fill: none; stroke: var(--preto); stroke-width: 1.6; stroke-linecap: round; }
+.ramo .destinos { display: grid; gap: 18px; }
+.destino .cartao { background: var(--papel); border-radius: var(--raio); padding: 16px 18px; border: 1px solid rgb(21 21 21 / 0.12); box-shadow: var(--sombra-painel); }
+.destino .titulo { display: flex; align-items: center; gap: 10px; font-weight: 650; font-size: 16px; }
+.destino .titulo .ladrilho { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; background: var(--preto); color: var(--amarelo); }
+.destino .linha-valor { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 14px; color: var(--tinta-2); }
+.destino .numero { white-space: nowrap; font-weight: 650; color: var(--preto); font-size: 18px; }
+.destino .numero .antes { color: var(--tinta-3); font-weight: 500; font-size: 14px; text-decoration: line-through; margin-right: 8px; }
+.virada .rodape-ramo { margin-top: 36px; font-weight: 600; display: flex; gap: 10px; align-items: center; }
+
+/* Movimento (GSAP). Sem JS ou com "reduzir movimento", tudo já aparece no lugar. */
+.anima .abertura [data-entra] { opacity: 0; }
+.linha-t { display: inline-block; }
+.ramo .linhas path { stroke-dasharray: 160; }
+.marcado { background-size: var(--grifo, 100%) 0.42em; }
+
+/* Seções claras */
+.secao { padding: clamp(72px, 10vw, 128px) 0; }
+.secao h2 { font-size: clamp(32px, 4.2vw, 52px); line-height: 1.06; letter-spacing: -0.03em; max-width: 820px; }
+.secao .lead { margin-top: 18px; font-size: 19px; color: var(--tinta-2); max-width: 640px; }
+
+/* Vídeo */
+.video-caixa { margin-top: 40px; position: relative; border-radius: 14px; overflow: hidden; background: var(--preto); box-shadow: var(--sombra-tela); aspect-ratio: 16 / 9; }
+.video-caixa video { width: 100%; height: 100%; object-fit: cover; }
+.video-caixa .tocar {
+  position: absolute; inset: 0; display: grid; place-items: end start; padding: clamp(16px, 3vw, 32px); border: 0; cursor: pointer;
+  background: linear-gradient(rgb(21 21 21 / 0) 40%, rgb(21 21 21 / 0.35)); color: var(--preto); font: inherit;
+}
+.video-caixa .tocar span { display: inline-flex; align-items: center; gap: 12px; background: var(--amarelo); padding: 16px 26px 16px 20px; border-radius: 999px; font-weight: 650; font-size: 17px; box-shadow: 0 12px 30px -10px rgb(21 21 21 / 0.5); transition: transform 200ms var(--sai); }
+.video-caixa .tocar:hover span { transform: scale(1.04); }
+.video-caixa .tocar svg { width: 22px; height: 22px; fill: var(--preto); }
+.video-caixa.tocando .tocar { display: none; }
+.nota { margin-top: 12px; font-size: 14px; color: var(--tinta-3); }
+
+/* As cinco perguntas */
+.perguntas .grade { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 6vw, 80px); align-items: center; margin-top: 48px; }
+.ficha { background: var(--papel); border: 1px solid var(--filete); border-radius: 14px; box-shadow: var(--sombra-painel); padding: 22px 24px 18px; }
+.ficha .nome { display: flex; align-items: center; gap: 10px; font-weight: 650; font-size: 19px; }
+.ficha .nome .ponto { width: 10px; height: 10px; border-radius: 50%; background: #566170; }
+.ficha .tag { margin-left: auto; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: var(--musgo-fundo); color: #2f6a2c; border: 1px solid #c8dfc1; }
+.ficha dl { margin: 16px 0 0; }
+.ficha .q { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-top: 1px solid var(--filete); }
+.ficha dt { color: var(--tinta-2); font-size: 16px; }
+.ficha dd { margin: 0; font-weight: 650; font-size: 18px; white-space: nowrap; }
+.ficha .q.saldo dd { color: var(--musgo); }
+.ficha .q.destaque { background: var(--amarelo-fundo); margin: 0 -24px; padding: 12px 24px; border-top-color: #f2d77a; }
+.fita-bloco { margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--filete); }
+.fita-bloco .rot { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--tinta-2); }
+.fita { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; height: 22px; margin-top: 8px; }
+.fita i { border-radius: 4px; background: var(--papel-2); border: 1px dashed var(--filete-forte); position: relative; overflow: hidden; }
+.fita i.cheio { border: 0; background: var(--t); }
+.fita i.parcial { border: 1px solid var(--filete-forte); }
+.fita i.parcial b { position: absolute; inset: 0 auto 0 0; width: var(--p); background: var(--t); }
+.fita i.cheio, .fita i.parcial b { transform-origin: left center; }
+.fita-bloco .escala { display: flex; justify-content: space-between; font-size: 12px; color: var(--tinta-3); margin-top: 6px; }
+.exemplo { margin-top: 12px; font-size: 13px; color: var(--tinta-3); }
+
+/* Funções */
+.funcao { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 5vw, 72px); align-items: center; padding: clamp(40px, 5vw, 64px) 0; border-top: 1px solid var(--filete); }
+.funcao:first-of-type { border-top: 0; }
+.funcao.inverte { grid-template-columns: 1.2fr 0.8fr; }
+.funcao.inverte .texto { order: 2; }
+.funcao h3 { font-size: clamp(24px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.02em; }
+.funcao p { margin-top: 14px; color: var(--tinta-2); }
+.funcao ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
+.funcao li { display: flex; gap: 10px; font-size: 16px; }
+.funcao li .icone { color: var(--musgo); margin-top: 3px; width: 18px; height: 18px; }
+.plano-tag { display: inline-block; margin-top: 18px; font-size: 13px; font-weight: 600; color: var(--tinta-2); padding: 3px 10px; border: 1px solid var(--filete-forte); border-radius: 999px; background: var(--papel); }
+.mais-funcoes { margin-top: clamp(32px, 4vw, 48px); display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--preto); }
+.mais-funcoes div { padding: 22px 24px 22px 0; border-bottom: 1px solid var(--filete); }
+.mais-funcoes div:not(:nth-child(3n + 1)) { padding-left: 24px; border-left: 1px solid var(--filete); }
+.mais-funcoes b { display: block; font-size: 17px; font-weight: 650; }
+.mais-funcoes span { display: block; margin-top: 6px; font-size: 15px; color: var(--tinta-2); }
+
+/* Planos */
+.planos { background: var(--papel-2); border-top: 1px solid var(--filete); border-bottom: 1px solid var(--filete); }
+.planos .cab { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; }
+.periodo { position: relative; display: inline-flex; background: var(--papel); border: 1px solid var(--filete-forte); border-radius: 999px; padding: 4px; }
+.periodo .pilula { position: absolute; left: 0; top: 4px; bottom: 4px; width: 0; border-radius: 999px; background: var(--preto); box-shadow: 0 2px 6px -2px rgb(21 21 21 / 0.4); }
+.periodo button { position: relative; z-index: 1; font: inherit; font-size: 15px; font-weight: 600; border: 0; background: none; padding: 9px 18px; border-radius: 999px; cursor: pointer; color: var(--tinta-2); min-height: 40px; transition: color 220ms var(--sai); }
+.periodo button[aria-pressed="true"] { color: var(--cal); }
+.sem-pilula .periodo button[aria-pressed="true"] { background: var(--preto); }
+.periodo small { font-weight: 500; opacity: 0.8; }
+.cartoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; align-items: stretch; }
+.plano { background: var(--papel); border: 1px solid var(--filete); border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; box-shadow: var(--sombra-painel); }
+.plano h3 { font-size: 24px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+.plano .frase { margin-top: 6px; color: var(--tinta-2); font-size: 15.5px; min-height: 2.9em; }
+.plano .valor { margin-top: 22px; display: flex; align-items: baseline; gap: 6px; }
+.plano .valor b { font-size: 46px; font-weight: 650; letter-spacing: -0.035em; line-height: 1; }
+.plano .valor span { color: var(--tinta-3); font-size: 15px; }
+.plano .equiv { margin-top: 6px; font-size: 14px; color: var(--tinta-3); min-height: 1.5em; }
+.plano .btn { margin-top: 22px; width: 100%; }
+.plano ul { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 11px; font-size: 15.5px; }
+.plano li { display: flex; gap: 10px; }
+.plano li .icone { color: var(--musgo); width: 18px; height: 18px; margin-top: 3px; }
+.plano li.base { font-weight: 600; }
+@media (hover: hover) {
+  .plano { transition: box-shadow 260ms var(--sai), translate 260ms var(--sai); }
+  .plano:hover { translate: 0 -3px; box-shadow: 0 2px 4px rgb(21 21 21 / 0.06), 0 22px 40px -22px rgb(21 21 21 / 0.35); }
+}
+.plano .valor b, .plano .valor span, .plano .equiv { display: inline-block; }
+.plano.principal { background: var(--preto); color: var(--cal); border-color: var(--preto); transform: translateY(-8px); box-shadow: 0 30px 60px -30px rgb(21 21 21 / 0.6); }
+.plano.principal .frase, .plano.principal .valor span, .plano.principal .equiv { color: var(--trilho-suave); }
+.plano.principal li .icone { color: var(--amarelo); }
+.plano .selo { font-size: 12px; font-weight: 600; color: var(--preto); background: var(--amarelo); padding: 3px 10px; border-radius: 999px; letter-spacing: 0; }
+.planos .rodape { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 15px; color: var(--tinta-2); }
+.planos .rodape span { display: inline-flex; gap: 8px; align-items: center; }
+.planos .rodape .icone { width: 18px; height: 18px; color: var(--musgo); }
+
+/* Dúvidas */
+.duvidas .grade { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.duvidas .lead { font-size: 17px; }
+.faq details { border-top: 1px solid var(--filete-forte); }
+.faq details:last-child { border-bottom: 1px solid var(--filete-forte); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 20px 0; font-weight: 600; font-size: 18px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .icone { transition: transform 240ms var(--sai); }
+.faq details[open] summary .icone { transform: rotate(45deg); }
+.faq .resposta { margin: 0 0 18px; background: var(--papel); border: 1px solid var(--filete); border-radius: 12px; box-shadow: var(--sombra-painel); overflow: hidden; }
+.faq .resposta p { padding: 18px 22px; color: var(--tinta-2); max-width: 68ch; }
+
+/* Chamada final */
+.final { padding: clamp(80px, 11vw, 144px) 0; text-align: left; }
+.final .envelope { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+.final h2 { font-size: clamp(36px, 5.4vw, 72px); line-height: 1.02; letter-spacing: -0.035em; max-width: 860px; }
+.final h2 em { font-style: normal; color: var(--amarelo); }
+.final p { margin-top: 20px; color: var(--trilho-suave); font-size: 18px; }
+.final .ctas { display: flex; flex-direction: column; gap: 10px; align-items: stretch; min-width: 260px; }
+
+.pe { background: var(--preto); color: var(--trilho-suave); border-top: 1px solid var(--grafite-borda); padding: 40px 0 48px; font-size: 14.5px; }
+.pe .envelope { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: center; justify-content: space-between; }
+.pe img { height: 36px; width: auto; }
+.pe nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.pe a { text-decoration: none; color: var(--trilho-texto); }
+.pe a:hover { color: var(--amarelo); }
+
+@media (max-width: 1000px) {
+  .abertura .grade-abertura { grid-template-columns: 1fr; }
+  .figura { max-width: 260px; justify-self: center; margin-top: -8px; }
+  .topo nav { display: none; }
+  .dor .grade, .perguntas .grade, .duvidas .grade { grid-template-columns: 1fr; }
+  .funcao, .funcao.inverte { grid-template-columns: 1fr; }
+  .funcao.inverte .texto { order: 0; }
+  .cartoes { grid-template-columns: 1fr; max-width: 520px; }
+  .plano.principal { transform: none; order: -1; }
+  .mais-funcoes { grid-template-columns: 1fr 1fr; }
+  .mais-funcoes div:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; }
+  .mais-funcoes div:nth-child(2n) { padding-left: 20px; border-left: 1px solid var(--filete); }
+  .final .envelope { grid-template-columns: 1fr; }
+  .final .ctas { flex-direction: row; flex-wrap: wrap; }
+}
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .topo .envelope { height: 60px; gap: 12px; }
+  .topo .marca img { height: 24px; }
+  .topo .entrar { display: none; }
+  .ramo { grid-template-columns: 1fr; }
+  .ramo { gap: 20px; }
+  .ramo svg.linhas { display: none; }
+  .com-movimento .ramo .destino { transform: translateY(12px); }
+  .abertura .ctas .btn { flex: 1 1 100%; }
+  .mais-funcoes { grid-template-columns: 1fr; }
+  .mais-funcoes div:nth-child(2n) { padding-left: 0; border-left: 0; }
+  .ficha { padding: 18px 16px 14px; }
+  .ficha .q.destaque { margin: 0 -16px; padding: 12px 16px; }
+  .ficha dt { font-size: 15px; }
+  .ficha dd { font-size: 16px; }
+  .duplicado .copia { transform: rotate(-1deg); }
+  .duplicado .copia2 { transform: rotate(0.8deg); }
+  .duplicado { padding: 0 6px; }
+  .faq summary { font-size: 17px; }
+  .faq .resposta p { padding: 16px 18px; }
+  .final .ctas .btn { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; } /* os atalhos rolam pelo interacoes.js */
+  *, *::before, *::after { transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
+}
+</style>
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 20 20"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></symbol>
+  <symbol id="i-mais" viewBox="0 0 20 20"><path d="M10 4.5v11M4.5 10h11"/></symbol>
+  <symbol id="i-avancar" viewBox="0 0 20 20"><path d="m8 4.5 5.5 5.5L8 15.5"/></symbol>
+  <symbol id="i-banco" viewBox="0 0 20 20"><path d="M3 8 10 3.5 17 8M4.5 8.5v6M8 8.5v6M12 8.5v6M15.5 8.5v6M3 16.5h14"/></symbol>
+  <symbol id="i-obras" viewBox="0 0 20 20"><path d="M3 16.5h14M5 16.5V9l5-4 5 4v7.5"/><path d="M8.5 16.5v-4h3v4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 20 20"><path d="M6.5 4.2v11.6a.7.7 0 0 0 1.05.6l9.2-5.8a.7.7 0 0 0 0-1.2l-9.2-5.8a.7.7 0 0 0-1.05.6z"/></symbol>
+</svg>
+
+<header class="topo" id="topo">
+  <div class="envelope">
+    <a class="marca" href="#inicio" aria-label="Obrativa, voltar ao início"><img src="assets/obrativa-horizontal.svg" alt="Obrativa" width="132" height="28"></a>
+    <nav aria-label="Seções">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#funcoes">Funções</a>
+      <a href="#planos">Planos</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <div class="acoes">
+      <a class="btn fant peq entrar" href="https://app.obrativa.com.br">Entrar</a>
+      <a class="btn prim peq" href="https://app.obrativa.com.br/?plano=gestao">Testar grátis</a>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<section class="abertura" id="inicio" aria-labelledby="titulo">
+  <div class="envelope">
+    <div class="grade-abertura">
+    <div class="texto">
+      <h1 id="titulo"><span class="linha-t" data-entra>Sua empresa sob controle.</span> <span class="linha-t" data-entra><span class="marcado">Cada obra também.</span></span></h1>
+      <p class="sub" data-entra>O financeiro feito para quem toca reforma, manutenção predial e fachada. Você lança o pagamento uma vez e já sabe quanto tem no banco e quanto cada obra recebeu, gastou e ainda tem a receber.</p>
+      <div class="ctas" data-entra>
+        <a class="btn prim" href="https://app.obrativa.com.br/?plano=gestao">Testar grátis por 14 dias <svg class="icone" aria-hidden="true"><use href="#i-avancar"/></svg></a>
+        <a class="btn fant" href="#video"><svg class="icone" aria-hidden="true" style="fill:currentColor;stroke:none"><use href="#i-play"/></svg> Ver o app em 1 minuto</a>
+      </div>
+      <p class="preco-inicial" data-entra>Planos a partir de <b>R$ 59 por mês</b>. Troque de plano quando quiser.</p>
+    </div>
+    <div class="figura" aria-hidden="true"><div class="chao"></div><div class="cena" id="cena"></div></div>
+    </div>
+    <div class="publico" aria-label="Para quem é" data-entra>
+      <b>Para empresas de</b><span>reformas</span><span>manutenção predial</span><span>fachadas</span><span>pintura</span><span>impermeabilização</span>
+    </div>
+    <div class="palco-tela" data-entra>
+      <figure class="tela" style="margin:0">
+        <img src="assets/tela-inicio.webp" width="1600" height="1000" alt="Painel Financeiro do Obrativa: saldo de todas as contas, entradas e saídas do mês, contas a pagar da semana e o resumo das obras." fetchpriority="high">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="dor escuro" aria-labelledby="t-dor">
+  <div class="envelope grade">
+    <div>
+      <h2 id="t-dor">Quem toca várias obras ao mesmo tempo conhece essa conta.</h2>
+      <p class="lead">O cliente paga parcelado, ao longo de meses. Material, diária e empreiteiro saem toda semana. E o dinheiro de todas as obras cai na mesma conta.</p>
+      <ul class="dores">
+        <li><b>Uma planilha para cada obra.</b><span>E nenhuma bate com o extrato do banco.</span></li>
+        <li><b>O mesmo pagamento anotado duas, três vezes.</b><span>No caixa, na planilha da obra, no caderno.</span></li>
+        <li><b>No fim do mês, a pergunta sem resposta.</b><span>Qual obra deu dinheiro, e qual está consumindo o caixa das outras?</span></li>
+      </ul>
+    </div>
+    <div class="duplicado" aria-hidden="true">
+      <span class="rot">O mesmo pagamento, em três lugares</span>
+      <div class="duplicado-lugar"><span class="lugar">Extrato do banco</span>
+        <div class="lanc"><span class="data">03/10</span><span class="quem">Locadora Andaimes Forte</span><span class="valor">−R$ 2.086,00</span><span class="det">Aluguel de andaimes</span></div></div>
+      <div class="duplicado-lugar copia"><span class="lugar">Planilha da obra</span>
+        <div class="lanc"><span class="data">03/10</span><span class="quem">Andaimes (Forte)</span><span class="valor">−R$ 2.086,00</span><span class="det"><i class="ponto" style="background:#566170"></i>Edifício Alfa</span></div></div>
+      <div class="duplicado-lugar copia2"><span class="lugar">Caderno do escritório <span class="etiqueta-dup">lançado de novo</span></span>
+        <div class="lanc"><span class="data">04/10</span><span class="quem">andaime alfa</span><span class="valor">−R$ 2.086,00</span><span class="det">pago?</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="virada" id="como-funciona" aria-labelledby="t-virada">
+  <div class="envelope">
+    <div class="cab">
+      <h2 id="t-virada">Um lançamento. Dois controles.</h2>
+      <p>Você registra o pagamento uma vez, dizendo de qual obra ele é. O caixa da empresa e o financeiro da obra se atualizam juntos. Nada é digitado duas vezes.</p>
+    </div>
+    <div class="ramo" id="ramo">
+      <div class="origem">
+        <div class="rot">Você lança uma vez</div>
+        <div class="lanc"><span class="data">08/11</span><span class="quem">Locadora Andaimes Forte</span><span class="valor">−R$ 3.800,00</span><span class="det"><i class="ponto" style="background:#d0921f"></i>Galpão Leopoldina · Aluguel de equipamentos</span></div>
+      </div>
+      <svg class="linhas" viewBox="0 0 120 260" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 130 C 60 130, 60 60, 120 60"/>
+        <path d="M0 130 C 60 130, 60 200, 120 200"/>
+      </svg>
+      <div class="destinos">
+        <div class="destino">
+          <div class="rot">E o caixa da empresa atualiza</div>
+          <div class="cartao">
+            <div class="titulo"><span class="ladrilho"><svg class="icone" aria-hidden="true"><use href="#i-banco"/></svg></span> Fluxo de Caixa Inter 2026</div>
+            <div class="linha-valor"><span>Saldo da conta</span><span class="numero"><span class="antes">R$ 72.334,00</span>R$ 68.534,00</span></div>
+          </div>
+        </div>
+        <div class="destino">
+          <div class="rot">E a obra também</div>
+          <div class="cartao">
+            <div class="titulo"><span class="ladrilho"><svg class="icone" aria-hidden="true"><use href="#i-obras"/></svg></span> Galpão Logístico Leopoldina</div>
+            <div class="linha-valor"><span>Despesas da obra</span><span class="numero"><span class="antes">R$ 86.867,00</span>R$ 90.667,00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="rodape-ramo">Transferência entre as suas próprias contas não vira receita nem despesa. O app sabe a diferença.</p>
+  </div>
+</section>
+
+<section class="secao" id="video" aria-labelledby="t-video">
+  <div class="envelope">
+    <h2 id="t-video">Veja o Obrativa funcionando.</h2>
+    <p class="lead">Um minuto com as telas de verdade: do lançamento ao resumo de cada obra.</p>
+    <div class="video-caixa" id="video-caixa">
+      <video id="video-demo" src="assets/obrativa-video.mp4" poster="assets/video-capa.webp" preload="none" playsinline width="1600" height="900"></video>
+      <button class="tocar" type="button" id="tocar" aria-label="Assistir ao vídeo de apresentação, 1 minuto"><span><svg aria-hidden="true" viewBox="0 0 20 20"><use href="#i-play"/></svg> Assistir · 1 min</span></button>
+    </div>
+    <p class="nota">Telas com dados de exemplo, de uma empresa fictícia.</p>
+  </div>
+</section>
+
+<section class="secao perguntas" aria-labelledby="t-perguntas" style="padding-top:0">
+  <div class="envelope">
+    <h2 id="t-perguntas">As cinco perguntas de cada obra, respondidas em dois cliques.</h2>
+    <p class="lead">Sem montar planilha. Os números saem dos mesmos lançamentos que alimentam o seu caixa.</p>
+    <div class="grade">
+      <div>
+        <div class="ficha">
+          <div class="nome"><span class="ponto"></span> Edifício Alfa <span class="tag">Em execução</span></div>
+          <dl>
+            <div class="q"><dt>Quanto vale o contrato?</dt><dd>R$ 260.000,00</dd></div>
+            <div class="q"><dt>Quanto já recebi?</dt><dd>R$ 234.000,00</dd></div>
+            <div class="q"><dt>Quanto já gastei?</dt><dd>R$ 148.485,00</dd></div>
+            <div class="q saldo"><dt>Qual é o saldo da obra?</dt><dd>R$ 85.515,00</dd></div>
+            <div class="q destaque"><dt>Quanto falta receber?</dt><dd>R$ 26.000,00</dd></div>
+          </dl>
+          <div class="fita-bloco">
+            <div class="rot"><span>Contrato já recebido</span><span>90%</span></div>
+            <div class="fita" role="img" aria-label="90% do contrato já recebido">
+              <i class="cheio" style="--t:#e1e3e5"></i><i class="cheio" style="--t:#c6c9ce"></i><i class="cheio" style="--t:#a7adb5"></i><i class="cheio" style="--t:#828a95"></i><i class="cheio" style="--t:#566170"></i><i class="cheio" style="--t:#47505c"></i><i class="parcial" style="--t:#39404a;--p:30%"><b></b></i>
+            </div>
+            <div class="escala"><span>R$ 0</span><span>cada tom vale R$ 37.142,86</span><span>R$ 260.000</span></div>
+          </div>
+        </div>
+        <p class="exemplo">Obra de exemplo. Cada obra ganha a sua cor, e a faixa enche conforme o cliente paga.</p>
+      </div>
+      <figure class="tela" style="margin:0">
+        <img src="assets/tela-obras.webp" width="1600" height="1000" loading="lazy" alt="Resumo das Obras: para cada obra, valor contratado, recebido, despesas, saldo da obra e quanto falta receber.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="secao" id="funcoes" aria-labelledby="t-funcoes" style="padding-top:0">
+  <div class="envelope">
+    <h2 id="t-funcoes">Tudo o que o dono da empresa precisa enxergar. Nada que ele não vá usar.</h2>
+
+    <article class="funcao">
+      <div class="texto">
+        <h3>Fluxo de caixa de cada banco, ano a ano.</h3>
+        <p>Um extrato para cada conta, em ordem de data e com o saldo do dia. Esqueceu um pagamento? Lance com a data certa e os saldos se ajustam sozinhos.</p>
+        <ul>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Saldo de abertura levado para o ano seguinte, sem virar receita</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Categorias que você mesmo edita, com uma explicação curta de cada uma</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Errou? Altere, exclua ou desfaça, com histórico de tudo</li>
+        </ul>
+        <span class="plano-tag">Em todos os planos</span>
+      </div>
+      <figure class="tela" style="margin:0"><img src="assets/tela-fluxo.webp" width="1600" height="1000" loading="lazy" alt="Fluxo de Caixa do Obrativa com lançamentos, obra de cada um e saldo corrido."></figure>
+    </article>
+
+    <article class="funcao inverte">
+      <div class="texto">
+        <h3>Quanto paguei de mão de obra no semestre? Está aqui.</h3>
+        <p>Filtre por obra, categoria, favorecido e período e veja o total na hora. Exporte em PDF ou Excel. O Livro Caixa Anual sai pronto para o seu contador.</p>
+        <ul>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Quanto foi pago a cada fornecedor, empreiteiro ou funcionário</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Receitas e despesas por conta, mês ou categoria</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Cada gráfico vem com uma frase que explica o número</li>
+        </ul>
+        <span class="plano-tag">Em todos os planos · relatórios por obra no Gestão e no Completo</span>
+      </div>
+      <figure class="tela" style="margin:0"><img src="assets/tela-relatorios.webp" width="1600" height="1000" loading="lazy" alt="Relatórios do Obrativa com gráficos de entradas e saídas e filtros por período, obra e categoria."></figure>
+    </article>
+
+    <article class="funcao">
+      <div class="texto">
+        <h3>O que vai entrar e sair, sem bagunçar o que já entrou.</h3>
+        <p>Parcelas do contrato, aditivos, empreitadas por medição, cobrança por apartamento num condomínio. O app avisa antes de vencer e mostra a projeção do caixa sempre separada do saldo real.</p>
+        <ul>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Lembrete três dias antes, no dia e depois do vencimento</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Pagou? Vincule ao lançamento, sem registrar de novo</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Recibo numerado com a sua logo, pronto para enviar ao cliente</li>
+        </ul>
+        <span class="plano-tag">No plano Completo</span>
+      </div>
+      <figure class="tela" style="margin:0"><img src="assets/tela-pagar.webp" width="1600" height="1000" loading="lazy" alt="Contas a pagar no Obrativa: parcelas com vencimento, valor em aberto e situação de cada uma."></figure>
+    </article>
+
+    <div class="mais-funcoes">
+      <div><b>Aditivos de contrato</b><span>O valor da obra se atualiza; o que já foi recebido não muda.</span></div>
+      <div><b>Despesas divididas entre obras</b><span>A compra de material para três obras sai uma vez do banco e vai para cada uma.</span></div>
+      <div><b>Aviso de obra parada</b><span>Obra sem despesa há 30 dias? O app pergunta se ela terminou.</span></div>
+      <div><b>Escritório separado das obras</b><span>Aluguel, contador e pró-labore num centro de custos próprio.</span></div>
+      <div><b>Equipe própria prevista</b><span>Oficiais, meio-oficiais e ajudantes por obra, contra o que foi pago.</span></div>
+      <div><b>Computador, notebook ou tablet</b><span>Abre no navegador e vira um atalho na tela, como um app.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="secao planos" id="planos" aria-labelledby="t-planos">
+  <div class="envelope">
+    <div class="cab">
+      <div>
+        <h2 id="t-planos">Escolha o plano do tamanho da sua empresa.</h2>
+        <p class="lead">Teste grátis por 14 dias. Mude de plano quando quiser, sem perder cadastros nem histórico.</p>
+      </div>
+      <div class="periodo" role="group" aria-label="Forma de pagamento">
+        <span class="pilula" aria-hidden="true"></span>
+        <button type="button" data-periodo="mes" aria-pressed="true">Mensal</button>
+        <button type="button" data-periodo="ano" aria-pressed="false">Anual <small>· pague 10 meses</small></button>
+      </div>
+    </div>
+
+    <div class="cartoes">
+      <article class="plano">
+        <h3>Light</h3>
+        <p class="frase">Seu financeiro organizado.</p>
+        <div class="valor"><b data-mes="R$ 59" data-ano="R$ 590">R$ 59</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
+        <p class="equiv" data-mes="" data-ano="equivale a R$ 49,17 por mês"></p>
+        <a class="btn" href="https://app.obrativa.com.br/?plano=light">Testar o Light grátis</a>
+        <ul>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Fluxo de caixa: o que entrou, saiu e sobrou</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Contas bancárias e transferências entre elas</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Categorias editáveis, com orientação de uso</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Relatórios por conta, período e categoria</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Histórico anual e Livro Caixa Anual</li>
+        </ul>
+      </article>
+
+      <article class="plano principal escuro">
+        <h3>Gestão <span class="selo">Recomendado</span></h3>
+        <p class="frase">Seu financeiro e suas obras sob controle.</p>
+        <div class="valor"><b data-mes="R$ 129" data-ano="R$ 1.290">R$ 129</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
+        <p class="equiv" data-mes="" data-ano="equivale a R$ 107,50 por mês"></p>
+        <a class="btn prim" href="https://app.obrativa.com.br/?plano=gestao">Testar o Gestão grátis</a>
+        <ul>
+          <li class="base"><svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg>Tudo do Light, e mais:</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Obras com valor do contrato e aditivos</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Um lançamento vale para a empresa e para a obra</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Recebido, gasto e saldo de cada obra</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Resumo de todas as obras e relatórios por obra</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Despesas comuns divididas entre as obras, sem duplicar a saída do banco</li>
+        </ul>
+      </article>
+
+      <article class="plano">
+        <h3>Completo</h3>
+        <p class="frase">Controle o presente e planeje o futuro.</p>
+        <div class="valor"><b data-mes="R$ 229" data-ano="R$ 2.290">R$ 229</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
+        <p class="equiv" data-mes="" data-ano="equivale a R$ 190,83 por mês"></p>
+        <a class="btn" href="https://app.obrativa.com.br/?plano=completo">Testar o Completo grátis</a>
+        <ul>
+          <li class="base"><svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg>Tudo do Gestão, e mais:</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Contas a pagar e a receber, com parcelas e pagamentos parciais</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Lembretes de vencimento</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Equipe própria prevista e empreitadas por medição</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Correção de parcelas e cobrança por condômino</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Projeção do caixa, separada do saldo real</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Recibos para os seus clientes</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="rodape">
+      <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>14 dias grátis em qualquer plano</span>
+      <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>No anual, você paga 10 meses e usa 12</span>
+      <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Seus dados guardados na nuvem, com cópia automática</span>
+    </div>
+  </div>
+</section>
+
+<section class="secao duvidas" id="duvidas" aria-labelledby="t-duvidas">
+  <div class="envelope grade">
+    <div>
+      <h2 id="t-duvidas">Dúvidas comuns.</h2>
+      <p class="lead">Não achou a sua? Comece o teste e veja com os seus próprios números.</p>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Preciso entender de contabilidade?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Não. Você lança o que entrou e o que saiu, e diz de qual obra é. Cada categoria tem uma explicação curta de quando usar. O resto o app calcula.</p></div>
+      </details>
+      <details>
+        <summary>O que quer dizer “um lançamento, dois controles”?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>O mesmo registro atualiza o saldo do banco e o financeiro da obra. Você não precisa de uma planilha para o caixa e outra para cada obra.</p></div>
+      </details>
+      <details>
+        <summary>Em quais aparelhos funciona?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>No navegador do computador, do notebook e do tablet, inclusive iPad. Dá para criar um atalho na área de trabalho ou na tela inicial e abrir como um app.</p></div>
+      </details>
+      <details>
+        <summary>Meus dados ficam seguros?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Ficam na nuvem, com acesso por login, conexão criptografada e cópias de segurança automáticas. Se o computador quebrar ou for trocado, nada se perde. Você pode exportar seus dados quando quiser, e o tratamento segue a LGPD.</p></div>
+      </details>
+      <details>
+        <summary>Posso começar no Light e mudar depois?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Pode. Ao mudar de plano, seus cadastros e todo o histórico financeiro continuam lá.</p></div>
+      </details>
+      <details>
+        <summary>O Obrativa substitui o meu contador?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Não. Ele organiza o seu caixa e o de cada obra, e entrega ao contador o Livro Caixa Anual e os relatórios prontos, em PDF ou Excel.</p></div>
+      </details>
+      <details>
+        <summary>Emite nota fiscal ou boleto?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Não. O plano Completo gera recibos numerados dos valores que você recebeu, para enviar ao cliente. Eles não são documento fiscal.</p></div>
+      </details>
+      <details>
+        <summary>Dá para importar o extrato do banco?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>A importação de extrato (OFX e CSV), com o reconhecimento do favorecido e da categoria, está prevista para a próxima etapa do Obrativa.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final escuro" aria-labelledby="t-final">
+  <div class="envelope">
+    <div>
+      <h2 id="t-final">Saiba hoje quanto cada obra recebeu, gastou <em>e ainda tem a receber.</em></h2>
+      <p>14 dias grátis. Planos a partir de R$ 59 por mês.</p>
+    </div>
+    <div class="ctas">
+      <a class="btn prim" href="https://app.obrativa.com.br/?plano=gestao">Testar grátis por 14 dias</a>
+      <a class="btn fant" href="#planos">Comparar os planos</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pe">
+  <div class="envelope">
+    <img src="assets/obrativa-horizontal-reverso.svg" alt="Obrativa" width="105" height="36">
+    <nav aria-label="Rodapé">
+      <a href="#planos">Planos</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="https://app.obrativa.com.br">Entrar</a>
+      <a href="privacidade.html">Política de privacidade</a>
+      <a href="termos.html">Termos de serviço</a>
+    </nav>
+    <span>© 2026 Obrativa · Informações claras para melhores decisões.</span>
+  </div>
+</footer>
+
+<script>
+  // Borda do topo ao rolar
+  const topo = document.getElementById('topo')
+  const marcarTopo = () => topo.classList.toggle('rolou', scrollY > 8)
+  addEventListener('scroll', marcarTopo, { passive: true }); marcarTopo()
+
+  // Vídeo: o botão grande dá o play; depois ficam os controles do navegador
+  const caixa = document.getElementById('video-caixa'), video = document.getElementById('video-demo')
+  document.getElementById('tocar').addEventListener('click', () => { caixa.classList.add('tocando'); video.controls = true; video.play(); video.focus() })
+  video.addEventListener('play', () => { caixa.classList.add('tocando'); video.controls = true })
+
+  // Mensal × anual: a pílula vai até o botão escolhido
+  const botoes = document.querySelectorAll('.periodo button')
+  const pilula = document.querySelector('.periodo .pilula')
+  const moverPilula = (b, animar) => {
+    const x = b.offsetLeft, w = b.offsetWidth
+    if (animar && window.gsap) gsap.to(pilula, { x, width: w, duration: 0.5, ease: 'expo.out' })
+    else if (window.gsap) gsap.set(pilula, { x, width: w })
+    else { pilula.style.transform = 'translateX(' + x + 'px)'; pilula.style.width = w + 'px' }
+  }
+  const ativo = () => document.querySelector('.periodo button[aria-pressed="true"]')
+  moverPilula(ativo(), false)
+  document.fonts?.ready.then(() => moverPilula(ativo(), false))
+  addEventListener('resize', () => moverPilula(ativo(), false))
+  botoes.forEach((b) => b.addEventListener('click', () => {
+    const p = b.dataset.periodo
+    if (b.getAttribute('aria-pressed') === 'true') return
+    botoes.forEach((x) => x.setAttribute('aria-pressed', String(x === b)))
+    moverPilula(b, true)
+    const alvos = document.querySelectorAll('[data-mes]')
+    if (window.trocarPreco) window.trocarPreco(alvos, p)
+    else alvos.forEach((el) => { el.textContent = el.dataset[p] })
+  }))
+
+</script>
+<script src="assets/gsap.min.js" defer></script>
+<script src="assets/ScrollTrigger.min.js" defer></script>
+<script src="assets/movimento.js" defer></script>
+<script src="assets/interacoes.js" defer></script>
+</body>
+</html>

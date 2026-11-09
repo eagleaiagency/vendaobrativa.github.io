@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <title>obrativa-marca</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <path d="M32 72 L32 32 L72 32 L224 32 L224 72 L72 72 L72 168 L32 168 Z" fill="#151515"/>
+      <path d="M184 184 L184 88 L224 88 L224 184 L224 224 L184 224 L32 224 L32 184 Z" fill="#151515"/>
+      <path d="M104 104 L152 104 L152 152 L104 152 Z" fill="#151515"/>
+    </g>
+  </g>
+</svg>
