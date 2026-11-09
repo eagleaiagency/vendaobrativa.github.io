@@ -313,8 +313,12 @@ p { margin: 0; text-wrap: pretty; }
 .pe a:hover { color: var(--amarelo); }
 
 @media (max-width: 1000px) {
-  .abertura .grade-abertura { grid-template-columns: 1fr; }
-  .figura { max-width: 260px; justify-self: center; margin-top: -8px; }
+  /* Tablet e celular: título e símbolo 3D lado a lado (título maior); o resto do texto embaixo, na largura toda */
+  .abertura .grade-abertura { grid-template-columns: minmax(0, 1fr) clamp(92px, 27vw, 240px); grid-template-areas: 'titulo figura' 'resto resto'; column-gap: clamp(8px, 3vw, 28px); row-gap: 0; align-items: center; }
+  .abertura .texto { display: contents; }
+  .abertura h1 { grid-area: titulo; }
+  .abertura .texto > :not(h1) { grid-column: 1 / -1; }
+  .figura { grid-area: figura; max-width: none; justify-self: end; margin: 0; }
   .topo nav { display: none; }
   .dor .grade, .perguntas .grade, .duvidas .grade { grid-template-columns: 1fr; }
   .funcao, .funcao.inverte { grid-template-columns: 1fr; }
@@ -326,6 +330,10 @@ p { margin: 0; text-wrap: pretty; }
   .mais-funcoes div:nth-child(2n) { padding-left: 20px; border-left: 1px solid var(--filete); }
   .final .envelope { grid-template-columns: 1fr; }
   .final .ctas { flex-direction: row; flex-wrap: wrap; }
+}
+@media (max-width: 400px) {
+  .abertura h1 { font-size: 34px; }
+  .abertura .grade-abertura { grid-template-columns: minmax(0, 1fr) 88px; }
 }
 @media (max-width: 760px) {
   body { font-size: 16px; }
