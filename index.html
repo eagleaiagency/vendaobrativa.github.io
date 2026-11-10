@@ -266,6 +266,7 @@ p { margin: 0; text-wrap: pretty; }
 .plano { background: var(--papel); border: 1px solid var(--filete); border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; box-shadow: var(--sombra-painel); }
 .plano h3 { font-size: 24px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
 .plano .frase { margin-top: 6px; color: var(--tinta-2); font-size: 15.5px; min-height: 2.9em; }
+.plano .frase .sem-obra { display: block; font-size: 14px; color: var(--tinta-3); }
 .plano .valor { margin-top: 22px; display: flex; align-items: baseline; gap: 6px; }
 .plano .valor b { font-size: 46px; font-weight: 650; letter-spacing: -0.035em; line-height: 1; }
 .plano .valor span { color: var(--tinta-3); font-size: 15px; }
@@ -313,6 +314,8 @@ p { margin: 0; text-wrap: pretty; }
 .pe img { height: 36px; width: auto; }
 .pe nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .pe a { text-decoration: none; color: var(--trilho-texto); }
+.pe nav a { padding: 11px 0; }
+.pe .contato a { text-decoration: underline; text-underline-offset: 3px; }
 .pe a:hover { color: var(--amarelo); }
 
 @media (max-width: 1000px) {
@@ -342,7 +345,8 @@ p { margin: 0; text-wrap: pretty; }
   body { font-size: 16px; }
   .topo .envelope { height: 60px; gap: 12px; }
   .topo .marca img { height: 24px; }
-  .topo .entrar { display: none; }
+  .topo .entrar { padding-inline: 10px; border-color: transparent; }
+  .topo .acoes { gap: 4px; }
   .ramo { grid-template-columns: 1fr; }
   .ramo { gap: 20px; }
   .ramo svg.linhas { display: none; }
@@ -407,7 +411,7 @@ p { margin: 0; text-wrap: pretty; }
         <a class="btn prim" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=gestao">Testar grátis por 14 dias <svg class="icone" aria-hidden="true"><use href="#i-avancar"/></svg></a>
         <a class="btn fant" href="#video"><svg class="icone" aria-hidden="true" style="fill:currentColor;stroke:none"><use href="#i-play"/></svg> Ver o app em 1 minuto</a>
       </div>
-      <p class="preco-inicial" data-entra>Planos a partir de <b>R$ 59 por mês</b>. Troque de plano quando quiser.</p>
+      <p class="preco-inicial" data-entra>Com o controle de cada obra: <b>R$ 129 por mês</b>. Só o caixa da empresa: R$ 59. Sem cartão no teste.</p>
     </div>
     <div class="figura" aria-hidden="true"><div class="chao"></div><div class="cena" id="cena"></div></div>
     </div>
@@ -599,7 +603,7 @@ p { margin: 0; text-wrap: pretty; }
     <div class="cartoes">
       <article class="plano">
         <h3>Light</h3>
-        <p class="frase">Seu financeiro organizado.</p>
+        <p class="frase">Seu financeiro organizado. <span class="sem-obra">Sem o controle por obra.</span></p>
         <div class="valor"><b data-mes="R$ 59" data-ano="R$ 590">R$ 59</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
         <p class="equiv" data-mes="" data-ano="equivale a R$ 49,17 por mês"></p>
         <a class="btn" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=light">Testar o Light grátis</a>
@@ -649,9 +653,10 @@ p { margin: 0; text-wrap: pretty; }
     </div>
 
     <div class="rodape">
-      <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>14 dias grátis em qualquer plano</span>
+      <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>14 dias grátis em qualquer plano, sem cartão</span>
       <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>No anual, você paga 10 meses e usa 12</span>
       <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Seus dados guardados na nuvem, com cópia automática</span>
+      <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Exporte tudo em Excel e PDF quando quiser</span>
     </div>
   </div>
 </section>
@@ -673,11 +678,11 @@ p { margin: 0; text-wrap: pretty; }
       </details>
       <details>
         <summary>Em quais aparelhos funciona?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
-        <div class="resposta"><p>No navegador do computador, do notebook e do tablet, inclusive iPad. Dá para criar um atalho na área de trabalho ou na tela inicial e abrir como um app.</p></div>
+        <div class="resposta"><p>No navegador do computador, do notebook, do tablet e do celular (iPhone e Android). Os dados ficam na sua conta e aparecem iguais em todos. Dá para criar um atalho na área de trabalho ou na tela inicial e abrir como um app.</p></div>
       </details>
       <details>
         <summary>Meus dados ficam seguros?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
-        <div class="resposta"><p>Ficam na nuvem, com acesso por login, conexão criptografada e cópias de segurança automáticas. Se o computador quebrar ou for trocado, nada se perde. Você pode exportar seus dados quando quiser, e o tratamento segue a LGPD.</p></div>
+        <div class="resposta"><p>Ficam na nuvem, com acesso por login, conexão criptografada e cópias de segurança automáticas. Se o computador ou o celular quebrar ou for trocado, nada se perde. Você pode exportar seus dados quando quiser, e o tratamento segue a LGPD.</p></div>
       </details>
       <details>
         <summary>Tenho mais de uma empresa. Preciso de duas assinaturas?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
@@ -696,12 +701,16 @@ p { margin: 0; text-wrap: pretty; }
         <div class="resposta"><p>Não. Ele organiza o seu caixa e o de cada obra, e entrega ao contador o Livro Caixa Anual e os relatórios prontos, em PDF ou Excel.</p></div>
       </details>
       <details>
+        <summary>Como falo com vocês?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Por e-mail, em <a href="mailto:contact.eagleai@gmail.com">contact.eagleai@gmail.com</a>. Se preferir, escreva também durante o teste grátis.</p></div>
+      </details>
+      <details>
         <summary>Emite nota fiscal ou boleto?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
         <div class="resposta"><p>Não. O plano Completo gera recibos numerados dos valores que você recebeu, para enviar ao cliente. Eles não são documento fiscal.</p></div>
       </details>
       <details>
         <summary>Dá para importar o extrato do banco?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
-        <div class="resposta"><p>A importação de extrato (OFX e CSV), com o reconhecimento do favorecido e da categoria, está prevista para a próxima etapa do Obrativa.</p></div>
+        <div class="resposta"><p>Dá. Importe o extrato em OFX, CSV ou PDF, como o banco entrega. O Obrativa sugere o favorecido e a categoria pelo que você já lançou, mostra o que é repetido e você confere antes de gravar. PDF escaneado (foto do papel) não é lido.</p></div>
       </details>
     </div>
   </div>
@@ -711,7 +720,7 @@ p { margin: 0; text-wrap: pretty; }
   <div class="envelope">
     <div>
       <h2 id="t-final">Saiba hoje quanto cada obra recebeu, gastou <em>e ainda tem a receber.</em></h2>
-      <p>14 dias grátis. Planos a partir de R$ 59 por mês.</p>
+      <p>14 dias grátis, sem cartão. Controle por obra a partir de R$ 129 por mês.</p>
     </div>
     <div class="ctas">
       <a class="btn prim" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=gestao">Testar grátis por 14 dias</a>
@@ -732,6 +741,7 @@ p { margin: 0; text-wrap: pretty; }
       <a href="privacidade.html">Política de privacidade</a>
       <a href="termos.html">Termos de serviço</a>
     </nav>
+    <span class="contato">Dúvidas ou ajuda: <a href="mailto:contact.eagleai@gmail.com">contact.eagleai@gmail.com</a></span>
     <span>© 2026 Obrativa · Informações claras para melhores decisões.</span>
   </div>
 </footer>
