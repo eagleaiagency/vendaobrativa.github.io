@@ -121,3 +121,16 @@
     })
   })
 })()
+
+// Menu do topo marca a seção que está na tela (página longa: o leitor sabe onde está)
+;(function () {
+  const links = [...document.querySelectorAll('.topo nav a[href^="#"]')]
+  const secoes = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean)
+  if (!secoes.length || !('IntersectionObserver' in window)) return
+  const marcar = (id) => links.forEach((a) => (a.getAttribute('href') === '#' + id ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')))
+  const obs = new IntersectionObserver((es) => {
+    const vis = es.filter((e) => e.isIntersecting).sort((x, y) => x.boundingClientRect.top - y.boundingClientRect.top)[0]
+    if (vis) marcar(vis.target.id)
+  }, { rootMargin: '-40% 0px -55% 0px' })
+  secoes.forEach((s) => obs.observe(s))
+})()

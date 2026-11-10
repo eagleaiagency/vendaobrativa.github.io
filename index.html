@@ -109,6 +109,7 @@ p { margin: 0; text-wrap: pretty; }
 .topo nav { display: flex; gap: 4px; margin-left: 12px; }
 .topo nav a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--tinta-2); padding: 8px 12px; border-radius: var(--raio-campo); }
 .topo nav a:hover { color: var(--preto); background: rgb(21 21 21 / 0.05); }
+.topo nav a[aria-current] { color: var(--preto); box-shadow: inset 0 -2px 0 var(--amarelo); border-radius: 0; }
 .topo .acoes { margin-left: auto; display: flex; gap: 8px; align-items: center; }
 
 /* Abertura */
@@ -134,7 +135,8 @@ p { margin: 0; text-wrap: pretty; }
   border-radius: 12px; overflow: hidden; background: var(--papel);
   border: 1px solid var(--filete); box-shadow: var(--sombra-tela);
 }
-.tela img { width: 100%; height: auto; aspect-ratio: 1600 / 1000; }
+.tela img { width: 100%; height: auto; aspect-ratio: 1600 / 1000; display: block; }
+@media (max-width: 760px) { .tela img { aspect-ratio: 750 / 938; } }
 .tela { will-change: auto; }
 .palco-tela .tela { margin-bottom: calc(-1 * clamp(60px, 10vw, 150px)); }
 .publico { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 28px; font-size: 14.5px; color: var(--tinta-3); }
@@ -294,6 +296,8 @@ p { margin: 0; text-wrap: pretty; }
 .duvidas .lead { font-size: 17px; }
 .faq details { border-top: 1px solid var(--filete-forte); }
 .faq details:last-child { border-bottom: 1px solid var(--filete-forte); }
+.faq-grupo + .faq-grupo { margin-top: 28px; }
+.faq-grupo h3 { font-size: 13px; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-2); margin: 0 0 6px; }
 .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 20px 0; font-weight: 600; font-size: 18px; }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary .icone { transition: transform 240ms var(--sai); }
@@ -343,6 +347,8 @@ p { margin: 0; text-wrap: pretty; }
 }
 @media (max-width: 760px) {
   body { font-size: 16px; }
+  .topo .acoes .btn, .periodo button { min-height: 44px; }
+  .resposta a, .pe .contato a { display: inline-block; padding: 12px 0; margin: -12px 0; }
   .topo .envelope { height: 60px; gap: 12px; }
   .topo .marca img { height: 24px; }
   .topo .entrar { padding-inline: 10px; border-color: transparent; }
@@ -406,7 +412,7 @@ p { margin: 0; text-wrap: pretty; }
     <div class="grade-abertura">
     <div class="texto">
       <h1 id="titulo"><span class="linha-t" data-entra>Sua empresa sob controle.</span> <span class="linha-t" data-entra><span class="marcado">Cada obra também.</span></span></h1>
-      <p class="sub" data-entra>O financeiro feito para quem toca reforma, manutenção predial e fachada. Você lança o pagamento uma vez e já sabe quanto tem no banco e quanto cada obra recebeu, gastou e ainda tem a receber.</p>
+      <p class="sub" data-entra>O financeiro feito para quem toca reforma, manutenção predial e fachada. Você lança o pagamento uma vez e já sabe quanto tem no banco e quanto cada obra recebeu, gastou e ainda tem a receber. O extrato do banco entra direto do arquivo, sem digitar de novo.</p>
       <div class="ctas" data-entra>
         <a class="btn prim" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=gestao">Testar grátis por 14 dias <svg class="icone" aria-hidden="true"><use href="#i-avancar"/></svg></a>
         <a class="btn fant" href="#video"><svg class="icone" aria-hidden="true" style="fill:currentColor;stroke:none"><use href="#i-play"/></svg> Ver o app em 1 minuto</a>
@@ -420,7 +426,7 @@ p { margin: 0; text-wrap: pretty; }
     </div>
     <div class="palco-tela" data-entra>
       <figure class="tela" style="margin:0">
-        <img src="assets/tela-inicio.webp" width="1600" height="1000" alt="Painel Financeiro do Obrativa: saldo de todas as contas, entradas e saídas do mês, contas a pagar da semana e o resumo das obras." fetchpriority="high">
+        <picture><source media="(max-width: 760px)" srcset="assets/tela-inicio-movel.webp" width="750" height="938"><img src="assets/tela-inicio.webp" width="1600" height="1000" alt="Painel Financeiro do Obrativa: saldo de todas as contas, entradas e saídas do mês, contas a pagar da semana e o resumo das obras." fetchpriority="high"></picture>
       </figure>
     </div>
   </div>
@@ -469,14 +475,14 @@ p { margin: 0; text-wrap: pretty; }
           <div class="rot">E o caixa da empresa atualiza</div>
           <div class="cartao">
             <div class="titulo"><span class="ladrilho"><svg class="icone" aria-hidden="true"><use href="#i-banco"/></svg></span> Fluxo de Caixa Inter 2026</div>
-            <div class="linha-valor"><span>Saldo da conta</span><span class="numero"><span class="antes">R$ 72.334,00</span>R$ 68.534,00</span></div>
+            <div class="linha-valor"><span>Saldo da conta</span><span class="numero"><span class="antes">R$ 95.904,00</span>R$ 92.104,00</span></div>
           </div>
         </div>
         <div class="destino">
           <div class="rot">E a obra também</div>
           <div class="cartao">
             <div class="titulo"><span class="ladrilho"><svg class="icone" aria-hidden="true"><use href="#i-obras"/></svg></span> Galpão Logístico Leopoldina</div>
-            <div class="linha-valor"><span>Despesas da obra</span><span class="numero"><span class="antes">R$ 86.867,00</span>R$ 90.667,00</span></div>
+            <div class="linha-valor"><span>Despesas da obra</span><span class="numero"><span class="antes">R$ 89.282,00</span>R$ 93.082,00</span></div>
           </div>
         </div>
       </div>
@@ -508,8 +514,8 @@ p { margin: 0; text-wrap: pretty; }
           <dl>
             <div class="q"><dt>Quanto vale o contrato?</dt><dd>R$ 260.000,00</dd></div>
             <div class="q"><dt>Quanto já recebi?</dt><dd>R$ 234.000,00</dd></div>
-            <div class="q"><dt>Quanto já gastei?</dt><dd>R$ 148.485,00</dd></div>
-            <div class="q saldo"><dt>Qual é o saldo da obra?</dt><dd>R$ 85.515,00</dd></div>
+            <div class="q"><dt>Quanto já gastei?</dt><dd>R$ 158.530,00</dd></div>
+            <div class="q saldo"><dt>Qual é o saldo da obra?</dt><dd>R$ 75.470,00</dd></div>
             <div class="q destaque"><dt>Quanto falta receber?</dt><dd>R$ 26.000,00</dd></div>
           </dl>
           <div class="fita-bloco">
@@ -517,13 +523,13 @@ p { margin: 0; text-wrap: pretty; }
             <div class="fita" role="img" aria-label="90% do contrato já recebido">
               <i class="cheio" style="--t:#e1e3e5"></i><i class="cheio" style="--t:#c6c9ce"></i><i class="cheio" style="--t:#a7adb5"></i><i class="cheio" style="--t:#828a95"></i><i class="cheio" style="--t:#566170"></i><i class="cheio" style="--t:#47505c"></i><i class="parcial" style="--t:#39404a;--p:30%"><b></b></i>
             </div>
-            <div class="escala"><span>R$ 0</span><span>cada tom vale R$ 37.142,86</span><span>R$ 260.000</span></div>
+            <div class="escala"><span>R$ 0</span><span>cada tom vale cerca de R$ 37 mil</span><span>R$ 260.000</span></div>
           </div>
         </div>
         <p class="exemplo">Obra de exemplo. Cada obra ganha a sua cor, e a faixa enche conforme o cliente paga.</p>
       </div>
       <figure class="tela" style="margin:0">
-        <img src="assets/tela-obras.webp" width="1600" height="1000" loading="lazy" alt="Resumo das Obras: para cada obra, valor contratado, recebido, despesas, saldo da obra e quanto falta receber.">
+        <picture><source media="(max-width: 760px)" srcset="assets/tela-obra-movel.webp" width="750" height="938"><img src="assets/tela-obra.webp" width="1600" height="1000" loading="lazy" alt="Tela de uma obra no Obrativa: quanto do contrato já foi recebido, na faixa de tons, e o saldo da obra; abaixo, valor contratado, recebido, despesas pagas e saldo a receber."></picture>
       </figure>
     </div>
   </div>
@@ -544,7 +550,7 @@ p { margin: 0; text-wrap: pretty; }
         </ul>
         <span class="plano-tag">Em todos os planos</span>
       </div>
-      <figure class="tela" style="margin:0"><img src="assets/tela-fluxo.webp" width="1600" height="1000" loading="lazy" alt="Fluxo de Caixa do Obrativa com lançamentos, obra de cada um e saldo corrido."></figure>
+      <figure class="tela" style="margin:0"><picture><source media="(max-width: 760px)" srcset="assets/tela-fluxo-movel.webp" width="750" height="938"><img src="assets/tela-fluxo.webp" width="1600" height="1000" loading="lazy" alt="Fluxo de Caixa do Obrativa com lançamentos, obra de cada um e saldo corrido."></picture></figure>
     </article>
 
     <article class="funcao inverte">
@@ -558,7 +564,7 @@ p { margin: 0; text-wrap: pretty; }
         </ul>
         <span class="plano-tag">Em todos os planos · relatórios por obra no Gestão e no Completo</span>
       </div>
-      <figure class="tela" style="margin:0"><img src="assets/tela-relatorios.webp" width="1600" height="1000" loading="lazy" alt="Relatórios do Obrativa com gráficos de entradas e saídas e filtros por período, obra e categoria."></figure>
+      <figure class="tela" style="margin:0"><picture><source media="(max-width: 760px)" srcset="assets/tela-relatorios-movel.webp" width="750" height="938"><img src="assets/tela-relatorios.webp" width="1600" height="1000" loading="lazy" alt="Relatórios do Obrativa com gráficos de entradas e saídas e filtros por período, obra e categoria."></picture></figure>
     </article>
 
     <article class="funcao">
@@ -572,13 +578,13 @@ p { margin: 0; text-wrap: pretty; }
         </ul>
         <span class="plano-tag">No plano Completo</span>
       </div>
-      <figure class="tela" style="margin:0"><img src="assets/tela-pagar.webp" width="1600" height="1000" loading="lazy" alt="Contas a pagar no Obrativa: parcelas com vencimento, valor em aberto e situação de cada uma."></figure>
+      <figure class="tela" style="margin:0"><picture><source media="(max-width: 760px)" srcset="assets/tela-pagar-movel.webp" width="750" height="938"><img src="assets/tela-pagar.webp" width="1600" height="1000" loading="lazy" alt="A pagar no Obrativa: total em aberto, o que já venceu e o que vence nos próximos 30 dias."></picture></figure>
     </article>
 
     <div class="mais-funcoes">
+      <div><b>Extrato do banco importado</b><span>OFX, CSV ou PDF, como o banco entrega. O app sugere favorecido e categoria pelo que você já lançou; você confere antes de gravar.</span></div>
       <div><b>Aditivos de contrato</b><span>O valor da obra se atualiza; o que já foi recebido não muda.</span></div>
       <div><b>Despesas divididas entre obras</b><span>A compra de material para três obras sai uma vez do banco e vai para cada uma.</span></div>
-      <div><b>Aviso de obra parada</b><span>Obra sem despesa há 30 dias? O app pergunta se ela terminou.</span></div>
       <div><b>Obras concluídas no arquivo</b><span>Terminou a garantia? Arquive a obra: sai da lista do dia a dia e o histórico fica guardado. Gestão e Completo.</span></div>
       <div><b>Equipe própria prevista</b><span>Oficiais, meio-oficiais e ajudantes por obra, contra o que foi pago.</span></div>
       <div><b>Várias empresas, um acesso</b><span>Tem mais de um CNPJ? Troque de empresa pelo topo da tela, sem misturar caixa nem relatórios. Plano Completo.</span></div>
@@ -668,6 +674,8 @@ p { margin: 0; text-wrap: pretty; }
       <p class="lead">Não achou a sua? Comece o teste e veja com os seus próprios números.</p>
     </div>
     <div class="faq">
+      <div class="faq-grupo">
+        <h3>No dia a dia</h3>
       <details>
         <summary>Preciso entender de contabilidade?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
         <div class="resposta"><p>Não. Você lança o que entrou e o que saiu, e diz de qual obra é. Cada categoria tem uma explicação curta de quando usar. O resto o app calcula.</p></div>
@@ -677,9 +685,28 @@ p { margin: 0; text-wrap: pretty; }
         <div class="resposta"><p>O mesmo registro atualiza o saldo do banco e o financeiro da obra. Você não precisa de uma planilha para o caixa e outra para cada obra.</p></div>
       </details>
       <details>
+        <summary>Dá para importar o extrato do banco?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Dá. Importe o extrato em OFX, CSV ou PDF, como o banco entrega. O Obrativa sugere o favorecido e a categoria pelo que você já lançou, mostra o que é repetido e você confere antes de gravar. PDF escaneado (foto do papel) não é lido.</p></div>
+      </details>
+      <details>
         <summary>Em quais aparelhos funciona?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
         <div class="resposta"><p>No navegador do computador, do notebook, do tablet e do celular (iPhone e Android). Os dados ficam na sua conta e aparecem iguais em todos. Dá para criar um atalho na área de trabalho ou na tela inicial e abrir como um app.</p></div>
       </details>
+      <details>
+        <summary>O que acontece com as obras que já terminaram?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Concluída, a obra continua aceitando recebimentos e despesas, por exemplo na garantia. Depois, nos planos Gestão e Completo, você pode arquivá-la: ela sai da lista do dia a dia e todo o histórico continua guardado, nos relatórios. Se precisar, é só reativar.</p></div>
+      </details>
+      <details>
+        <summary>O Obrativa substitui o meu contador?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Não. Ele organiza o seu caixa e o de cada obra, e entrega ao contador o Livro Caixa Anual e os relatórios prontos, em PDF ou Excel.</p></div>
+      </details>
+      <details>
+        <summary>Emite nota fiscal ou boleto?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Não. O plano Completo gera recibos numerados dos valores que você recebeu, para enviar ao cliente. Eles não são documento fiscal.</p></div>
+      </details>
+      </div>
+      <div class="faq-grupo">
+        <h3>Dados e segurança</h3>
       <details>
         <summary>Meus dados ficam seguros?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
         <div class="resposta"><p>Ficam na nuvem, com acesso por login, conexão criptografada e cópias de segurança automáticas. Se o computador ou o celular quebrar ou for trocado, nada se perde. Você pode exportar seus dados quando quiser, e o tratamento segue a LGPD.</p></div>
@@ -688,30 +715,26 @@ p { margin: 0; text-wrap: pretty; }
         <summary>Tenho mais de uma empresa. Preciso de duas assinaturas?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
         <div class="resposta"><p>Não. No plano Completo você administra várias empresas, cada uma com seu CNPJ, com o mesmo acesso. Cada empresa tem os próprios fluxos, obras, lançamentos e relatórios, e a troca é feita pelo topo da tela. Os valores de uma empresa nunca aparecem na outra.</p></div>
       </details>
+      </div>
+      <div class="faq-grupo">
+        <h3>Planos e pagamento</h3>
       <details>
-        <summary>O que acontece com as obras que já terminaram?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
-        <div class="resposta"><p>Concluída, a obra continua aceitando recebimentos e despesas, por exemplo na garantia. Depois, nos planos Gestão e Completo, você pode arquivá-la: ela sai da lista do dia a dia e todo o histórico continua guardado, nos relatórios. Se precisar, é só reativar.</p></div>
+        <summary>O que acontece depois dos 14 dias?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Você escolhe o plano e a forma de pagamento: Pix, boleto ou cartão de crédito. Se não continuar, nada é apagado: você segue vendo tudo e pode exportar os dados; só não lança nem altera até retomar.</p></div>
       </details>
       <details>
         <summary>Posso começar no Light e mudar depois?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
         <div class="resposta"><p>Pode. Ao mudar de plano, seus cadastros e todo o histórico financeiro continuam lá.</p></div>
       </details>
       <details>
-        <summary>O Obrativa substitui o meu contador?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
-        <div class="resposta"><p>Não. Ele organiza o seu caixa e o de cada obra, e entrega ao contador o Livro Caixa Anual e os relatórios prontos, em PDF ou Excel.</p></div>
+        <summary>Como cancelo?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>No próprio app, em Configurações, Plano. O acesso continua até o fim do período já pago e a assinatura não é renovada. Seus dados não são apagados e podem ser exportados.</p></div>
       </details>
       <details>
         <summary>Como falo com vocês?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
         <div class="resposta"><p>Por e-mail, em <a href="mailto:contact.eagleai@gmail.com">contact.eagleai@gmail.com</a>. Se preferir, escreva também durante o teste grátis.</p></div>
       </details>
-      <details>
-        <summary>Emite nota fiscal ou boleto?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
-        <div class="resposta"><p>Não. O plano Completo gera recibos numerados dos valores que você recebeu, para enviar ao cliente. Eles não são documento fiscal.</p></div>
-      </details>
-      <details>
-        <summary>Dá para importar o extrato do banco?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
-        <div class="resposta"><p>Dá. Importe o extrato em OFX, CSV ou PDF, como o banco entrega. O Obrativa sugere o favorecido e a categoria pelo que você já lançou, mostra o que é repetido e você confere antes de gravar. PDF escaneado (foto do papel) não é lido.</p></div>
-      </details>
+      </div>
     </div>
   </div>
 </section>
