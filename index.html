@@ -255,6 +255,23 @@ p { margin: 0; text-wrap: pretty; }
 .mais-funcoes b { display: block; font-size: 17px; font-weight: 650; }
 .mais-funcoes span { display: block; margin-top: 6px; font-size: 15px; color: var(--tinta-2); }
 
+/* Fundador: credibilidade antes do preço (aditivo, cap. 16) */
+.fundador-grade { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.fundador-foto { margin: 0; position: relative; }
+.fundador-foto img { display: block; width: 100%; height: auto; aspect-ratio: 566 / 753; object-fit: cover; border-radius: 14px; box-shadow: var(--sombra-painel); }
+.fundador-foto::after { content: ''; position: absolute; left: -12px; bottom: -12px; width: 38%; height: 12px; background: var(--amarelo); border-radius: 3px; }
+.fundador .sobretitulo { font-size: 14px; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-2); margin: 0 0 10px; }
+.fundador h2 { margin: 0 0 18px; }
+.fundador h2 em { font-style: normal; color: var(--tinta-2); }
+.fundador-texto > p { color: var(--tinta-2); max-width: 62ch; }
+.fundador-texto > p + p { margin-top: 12px; }
+.fundador-frase { margin: 22px 0 0; padding: 14px 18px; border-left: 4px solid var(--amarelo); background: var(--papel); border-radius: 0 10px 10px 0; font-size: 19px; font-weight: 650; color: var(--preto); }
+.fundador-assinatura { margin-top: 12px; font-size: 14px; color: var(--tinta-3); }
+@media (max-width: 760px) {
+  .fundador-grade { grid-template-columns: 1fr; }
+  .fundador-foto { max-width: 320px; }
+}
+
 /* Planos */
 .planos { background: var(--papel-2); border-top: 1px solid var(--filete); border-bottom: 1px solid var(--filete); }
 .planos .cab { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; }
@@ -268,6 +285,13 @@ p { margin: 0; text-wrap: pretty; }
 .plano { background: var(--papel); border: 1px solid var(--filete); border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; box-shadow: var(--sombra-painel); }
 .plano h3 { font-size: 24px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
 .plano .frase { margin-top: 6px; color: var(--tinta-2); font-size: 15.5px; min-height: 2.9em; }
+.plano .dia { margin-top: 4px; font-size: 15px; font-weight: 600; color: var(--tinta-2); }
+.plano .dia:empty { display: none; }
+.plano .limites { margin-top: 6px; font-size: 14px; font-weight: 600; }
+.plano .renovacao { margin-top: 4px; font-size: 13.5px; color: var(--tinta-3); }
+.escuro .plano .dia, .plano.escuro .dia { color: var(--trilho-texto); }
+.plano.escuro .renovacao { color: var(--trilho-suave); }
+.oferta-lancamento { margin: 24px 0 0; padding: 12px 16px; border-radius: 10px; background: var(--amarelo-fundo); font-size: 15px; max-width: 72ch; }
 .plano .frase .sem-obra { display: block; font-size: 14px; color: var(--tinta-3); }
 .plano .valor { margin-top: 22px; display: flex; align-items: baseline; gap: 6px; }
 .plano .valor b { font-size: 46px; font-weight: 650; letter-spacing: -0.035em; line-height: 1; }
@@ -417,7 +441,7 @@ p { margin: 0; text-wrap: pretty; }
         <a class="btn prim" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=gestao">Testar grátis por 14 dias <svg class="icone" aria-hidden="true"><use href="#i-avancar"/></svg></a>
         <a class="btn fant" href="#video"><svg class="icone" aria-hidden="true" style="fill:currentColor;stroke:none"><use href="#i-play"/></svg> Ver o app em 1 minuto</a>
       </div>
-      <p class="preco-inicial" data-entra>Com o controle de cada obra: <b>R$ 129 por mês</b>. Só o caixa da empresa: R$ 59. Sem cartão no teste.</p>
+      <p class="preco-inicial" data-entra>Com o controle de cada obra: <b>R$ 149,90 por mês</b>, cerca de R$ 5,00 por dia, no preço de lançamento dos primeiros 12 meses. Só o caixa da empresa: R$ 69,90. Sem cartão no teste.</p>
     </div>
     <div class="figura" aria-hidden="true"><div class="chao"></div><div class="cena" id="cena"></div></div>
     </div>
@@ -592,6 +616,23 @@ p { margin: 0; text-wrap: pretty; }
   </div>
 </section>
 
+<section class="secao fundador" id="fundador" aria-labelledby="t-fundador">
+  <div class="envelope fundador-grade">
+    <figure class="fundador-foto">
+      <img src="assets/fundador.jpg" width="566" height="753" loading="lazy" alt="Marcelo Zambia, engenheiro civil e idealizador do Obrativa">
+    </figure>
+    <div class="fundador-texto">
+      <p class="sobretitulo">Quem está por trás do Obrativa</p>
+      <h2 id="t-fundador">A união entre teoria e prática. <em>Mais de 30 anos de obras transformados em uma solução de gestão.</em></h2>
+      <p>Marcelo Zambia é engenheiro civil, pós-graduado em Engenharia de Perícias pela PUC Minas. Fundador da Minas Edifica, construiu uma trajetória de mais de três décadas dedicadas à engenharia, à manutenção e à reforma predial.</p>
+      <p>Ao longo desse caminho, enfrentou os desafios da rotina de milhares de empresários: administrar equipes e empreiteiros, acompanhar contratos, pagamentos e recebimentos, e saber com precisão os custos e o resultado financeiro de cada obra.</p>
+      <p>Dessa combinação entre conhecimento técnico e experiência de empresário nasceu o Obrativa: um aplicativo idealizado por quem sabe não só como a gestão financeira deveria funcionar na teoria, mas como ela precisa funcionar na prática.</p>
+      <blockquote class="fundador-frase">A teoria oferece o conhecimento. A prática mostra o caminho.</blockquote>
+      <p class="fundador-assinatura">Obrativa · criado por quem conhece a realidade das obras.</p>
+    </div>
+  </div>
+</section>
+
 <section class="secao planos" id="planos" aria-labelledby="t-planos">
   <div class="envelope">
     <div class="cab">
@@ -606,12 +647,16 @@ p { margin: 0; text-wrap: pretty; }
       </div>
     </div>
 
+    <p class="oferta-lancamento">Preço especial de lançamento nos primeiros 12 meses de cada assinatura. O preço regular previsto para a renovação aparece em cada plano. A cobrança é mensal ou anual; o valor por dia é só para comparar.</p>
     <div class="cartoes">
       <article class="plano">
         <h3>Light</h3>
         <p class="frase">Seu financeiro organizado. <span class="sem-obra">Sem o controle por obra.</span></p>
-        <div class="valor"><b data-mes="R$ 59" data-ano="R$ 590">R$ 59</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
-        <p class="equiv" data-mes="" data-ano="equivale a R$ 49,17 por mês"></p>
+        <div class="valor"><b data-mes="R$ 69,90" data-ano="R$ 699">R$ 69,90</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
+        <p class="equiv" data-mes="" data-ano="equivale a R$ 58,25 por mês no 1º ano"></p>
+        <p class="dia" data-mes="cerca de R$ 2,33 por dia" data-ano="">cerca de R$ 2,33 por dia</p>
+        <p class="limites">1 CNPJ · 1 usuário</p>
+        <p class="renovacao" data-mes="Renovação prevista: R$ 99,99 por mês" data-ano="Renovação prevista: R$ 999,90 por ano">Renovação prevista: R$ 99,99 por mês</p>
         <a class="btn" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=light">Testar o Light grátis</a>
         <ul>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Fluxo de caixa: o que entrou, saiu e sobrou</li>
@@ -625,8 +670,11 @@ p { margin: 0; text-wrap: pretty; }
       <article class="plano principal escuro">
         <h3>Gestão <span class="selo">Recomendado</span></h3>
         <p class="frase">Seu financeiro e suas obras sob controle.</p>
-        <div class="valor"><b data-mes="R$ 129" data-ano="R$ 1.290">R$ 129</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
-        <p class="equiv" data-mes="" data-ano="equivale a R$ 107,50 por mês"></p>
+        <div class="valor"><b data-mes="R$ 149,90" data-ano="R$ 1.499">R$ 149,90</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
+        <p class="equiv" data-mes="" data-ano="equivale a R$ 124,92 por mês no 1º ano"></p>
+        <p class="dia" data-mes="cerca de R$ 5,00 por dia" data-ano="">cerca de R$ 5,00 por dia</p>
+        <p class="limites">1 CNPJ · até 3 usuários</p>
+        <p class="renovacao" data-mes="Renovação prevista: R$ 199,90 por mês" data-ano="Renovação prevista: R$ 1.999 por ano">Renovação prevista: R$ 199,90 por mês</p>
         <a class="btn prim" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=gestao">Testar o Gestão grátis</a>
         <ul>
           <li class="base"><svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg>Tudo do Light, e mais:</li>
@@ -634,7 +682,7 @@ p { margin: 0; text-wrap: pretty; }
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Um lançamento vale para a empresa e para a obra</li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Recebido, gasto e saldo de cada obra</li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Resumo de todas as obras e relatórios por obra</li>
-          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Despesas comuns divididas entre as obras, sem duplicar a saída do banco</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Materiais e mão de obra divididos entre as obras (por valor, percentual, dias ou proporção dos contratos), sem duplicar a saída do banco</li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Obras concluídas no arquivo, com todo o histórico guardado</li>
         </ul>
       </article>
@@ -642,18 +690,21 @@ p { margin: 0; text-wrap: pretty; }
       <article class="plano">
         <h3>Completo</h3>
         <p class="frase">Controle o presente e planeje o futuro.</p>
-        <div class="valor"><b data-mes="R$ 229" data-ano="R$ 2.290">R$ 229</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
-        <p class="equiv" data-mes="" data-ano="equivale a R$ 190,83 por mês"></p>
+        <div class="valor"><b data-mes="R$ 249,90" data-ano="R$ 2.499">R$ 249,90</b><span data-mes="por mês" data-ano="por ano">por mês</span></div>
+        <p class="equiv" data-mes="" data-ano="equivale a R$ 208,25 por mês no 1º ano"></p>
+        <p class="dia" data-mes="cerca de R$ 8,33 por dia" data-ano="">cerca de R$ 8,33 por dia</p>
+        <p class="limites">2 CNPJs · até 5 usuários</p>
+        <p class="renovacao" data-mes="Renovação prevista: R$ 299,90 por mês" data-ano="Renovação prevista: R$ 2.999 por ano">Renovação prevista: R$ 299,90 por mês</p>
         <a class="btn" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=completo">Testar o Completo grátis</a>
         <ul>
           <li class="base"><svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg>Tudo do Gestão, e mais:</li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Contas a pagar e a receber, com parcelas e pagamentos parciais</li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Lembretes de vencimento</li>
-          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Equipe própria prevista e empreitadas por medição</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Empreitadas com pagamentos numerados e medições; equipe própria prevista</li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Correção de parcelas e cobrança por condômino</li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Projeção do caixa, separada do saldo real</li>
           <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Recibos para os seus clientes</li>
-          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Várias empresas (CNPJs) com o mesmo acesso, cada uma com seus dados</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Duas empresas (CNPJs) com o mesmo login, sem misturar contas, obras e relatórios</li>
         </ul>
       </article>
     </div>
@@ -661,6 +712,7 @@ p { margin: 0; text-wrap: pretty; }
     <div class="rodape">
       <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>14 dias grátis em qualquer plano, sem cartão</span>
       <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>No anual, você paga 10 meses e usa 12</span>
+      <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Cada pessoa com o próprio login e perfil (administrador, operador, consulta ou contador)</span>
       <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Seus dados guardados na nuvem, com cópia automática</span>
       <span><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Exporte tudo em Excel e PDF quando quiser</span>
     </div>
@@ -713,11 +765,19 @@ p { margin: 0; text-wrap: pretty; }
       </details>
       <details>
         <summary>Tenho mais de uma empresa. Preciso de duas assinaturas?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
-        <div class="resposta"><p>Não. No plano Completo você administra várias empresas, cada uma com seu CNPJ, com o mesmo acesso. Cada empresa tem os próprios fluxos, obras, lançamentos e relatórios, e a troca é feita pelo topo da tela. Os valores de uma empresa nunca aparecem na outra.</p></div>
+        <div class="resposta"><p>Não. O plano Completo inclui duas empresas, cada uma com seu CNPJ, com o mesmo login. Cada empresa tem os próprios fluxos, obras, lançamentos e relatórios, e a troca é feita pelo topo da tela. Os valores de uma empresa nunca aparecem na outra.</p></div>
       </details>
       </div>
       <div class="faq-grupo">
         <h3>Planos e pagamento</h3>
+      <details>
+        <summary>O preço muda depois do primeiro ano?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>Os valores de hoje são o preço especial de lançamento, válido nos primeiros 12 meses de cada assinatura. Depois, vale o preço regular previsto, mostrado em cada plano: R$ 99,99, R$ 199,90 ou R$ 299,90 por mês (R$ 999,90, R$ 1.999 ou R$ 2.999 no anual). Você é avisado antes da renovação e pode cancelar quando quiser.</p></div>
+      </details>
+      <details>
+        <summary>Quantas pessoas podem usar?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+        <div class="resposta"><p>O Light é de 1 usuário; o Gestão, até 3; o Completo, até 5, contando o titular. Cada pessoa entra com o próprio e-mail e senha e recebe um perfil: administrador, operador financeiro, consulta ou contador. Usar o mesmo login no computador e no celular não conta como outro usuário.</p></div>
+      </details>
       <details>
         <summary>O que acontece depois dos 14 dias?<svg class="icone" aria-hidden="true"><use href="#i-mais"/></svg></summary>
         <div class="resposta"><p>Você escolhe o plano e a forma de pagamento: Pix, boleto ou cartão de crédito. Se não continuar, nada é apagado: você segue vendo tudo e pode exportar os dados; só não lança nem altera até retomar.</p></div>
@@ -743,7 +803,7 @@ p { margin: 0; text-wrap: pretty; }
   <div class="envelope">
     <div>
       <h2 id="t-final">Saiba hoje quanto cada obra recebeu, gastou <em>e ainda tem a receber.</em></h2>
-      <p>14 dias grátis, sem cartão. Controle por obra a partir de R$ 129 por mês.</p>
+      <p>14 dias grátis, sem cartão. Controle por obra a partir de R$ 149,90 por mês no preço de lançamento.</p>
     </div>
     <div class="ctas">
       <a class="btn prim" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=gestao">Testar grátis por 14 dias</a>
