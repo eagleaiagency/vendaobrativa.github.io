@@ -2,7 +2,7 @@
 // primeiro, contato por último). As respostas vão por e-mail para a equipe
 // (função "interessado" no Supabase); se ela não responder, abre um e-mail pronto.
 (function () {
-  const FUNCAO = 'https://pivphkmpacgbpqodjnds.supabase.co/functions/v1/interessado'
+  const FUNCAO = 'https://pivphkmpacgbpqodjnds.supabase.co/functions/v1/bright-responder'
   const EMAIL = 'contact.eagleai@gmail.com'
   const APP = 'https://eagleaiagency.github.io/obrativa.github.io/'
   const FIM_PROMO = new Date('2027-01-31T23:59:59-03:00')
