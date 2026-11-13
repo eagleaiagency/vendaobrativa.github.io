@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://pivphkmpacgbpqodjnds.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self' mailto:">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico grátis · Obrativa</title>
+<meta name="description" content="Responda 5 perguntas rápidas e veja qual plano do Obrativa serve para a sua empresa de obras e reformas. Leva menos de 1 minuto.">
+<meta name="theme-color" content="#151515">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/diagnostico.css">
+</head>
+<body>
+<header class="topo"><div class="envelope">
+  <a href="./" class="marca"><img src="assets/obrativa-horizontal.svg" alt="Obrativa, voltar ao site" width="114" height="24"></a>
+  <span class="promo-mini" data-promo>Preço de lançamento até 31/01/2027</span>
+</div></header>
+
+<main class="envelope">
+  <div class="cabeca">
+    <p class="sobretitulo">Diagnóstico grátis · leva menos de 1 minuto</p>
+    <h1>Descubra o plano certo para a sua empresa</h1>
+    <p class="lead">Cinco perguntas rápidas sobre como você controla o dinheiro das obras hoje. No fim, você vê o plano recomendado e já pode começar o teste grátis de 7 dias.</p>
+  </div>
+
+  <form id="diag" class="cartao" novalidate>
+    <div class="progresso" aria-hidden="true"><i id="barra"></i></div>
+    <p class="passo-n" id="passo-n" aria-live="polite">Pergunta 1 de 5</p>
+
+    <!-- 1 · atividade e papel -->
+    <fieldset class="passo" data-passo="1">
+      <legend>Sobre a sua empresa</legend>
+      <p class="porque">Assim a gente entende o tipo de obra que você toca.</p>
+      <div class="pergunta" data-campo="atividade" data-multi>
+        <p class="rot">O que a sua empresa faz? <small>pode marcar mais de uma</small></p>
+        <div class="opcoes">
+          <button type="button" data-valor="Reformas">Reformas</button>
+          <button type="button" data-valor="Manutenção predial">Manutenção predial</button>
+          <button type="button" data-valor="Fachada, pintura ou impermeabilização">Fachada, pintura ou impermeabilização</button>
+          <button type="button" data-valor="Construção">Construção</button>
+          <button type="button" data-valor="Outro">Outro</button>
+        </div>
+      </div>
+      <div class="pergunta" data-campo="papel">
+        <p class="rot">Qual é o seu papel?</p>
+        <div class="opcoes">
+          <button type="button" data-valor="Dono ou sócio">Dono ou sócio</button>
+          <button type="button" data-valor="Financeiro ou administrativo">Financeiro ou administrativo</button>
+          <button type="button" data-valor="Engenheiro ou encarregado">Engenheiro ou encarregado</button>
+          <button type="button" data-valor="Outro">Outro</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 2 · tamanho -->
+    <fieldset class="passo" data-passo="2" hidden>
+      <legend>Tamanho da operação</legend>
+      <p class="porque">Para indicar quantos usuários e quais controles fazem sentido.</p>
+      <div class="pergunta" data-campo="pessoas">
+        <p class="rot">Quantas pessoas trabalham na empresa?</p>
+        <div class="opcoes">
+          <button type="button" data-valor="Somente eu">Somente eu</button>
+          <button type="button" data-valor="2 a 5">2 a 5</button>
+          <button type="button" data-valor="6 a 10">6 a 10</button>
+          <button type="button" data-valor="11 a 15">11 a 15</button>
+          <button type="button" data-valor="Mais de 15">Mais de 15</button>
+        </div>
+      </div>
+      <div class="pergunta" data-campo="obras">
+        <p class="rot">Quantas obras você tem em andamento?</p>
+        <div class="opcoes">
+          <button type="button" data-valor="Nenhuma agora">Nenhuma agora</button>
+          <button type="button" data-valor="1 a 2">1 a 2</button>
+          <button type="button" data-valor="3 a 5">3 a 5</button>
+          <button type="button" data-valor="Mais de 5">Mais de 5</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 3 · hoje -->
+    <fieldset class="passo" data-passo="3" hidden>
+      <legend>Como está hoje</legend>
+      <p class="porque">Para mostrar o que muda no seu dia a dia.</p>
+      <div class="pergunta" data-campo="ferramenta">
+        <p class="rot">Como você controla o financeiro hoje?</p>
+        <div class="opcoes">
+          <button type="button" data-valor="Caderno ou não controlo">Caderno, ou não controlo</button>
+          <button type="button" data-valor="Planilha (Excel ou Google)">Planilha (Excel ou Google)</button>
+          <button type="button" data-valor="Sistema financeiro genérico">Sistema financeiro genérico</button>
+          <button type="button" data-valor="Sistema de obras">Sistema de obras</button>
+        </div>
+      </div>
+      <div class="pergunta" data-campo="dificuldades" data-multi>
+        <p class="rot">O que mais pesa hoje? <small>pode marcar mais de uma</small></p>
+        <div class="opcoes">
+          <button type="button" data-valor="Saber o saldo e o fluxo de caixa">Saber o saldo e o fluxo de caixa</button>
+          <button type="button" data-valor="Saber quanto cada obra recebeu e gastou">Saber quanto cada obra recebeu e gastou</button>
+          <button type="button" data-valor="Contas a pagar e a receber">Contas a pagar e a receber</button>
+          <button type="button" data-valor="Controlar o que já paguei aos empreiteiros">Controlar o que já paguei aos empreiteiros</button>
+          <button type="button" data-valor="Separar o dinheiro da empresa e das obras">Separar o dinheiro da empresa e das obras</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 4 · detalhes -->
+    <fieldset class="passo" data-passo="4" hidden>
+      <legend>Mais dois detalhes</legend>
+      <p class="porque">Eles definem se o plano Gestão basta ou se o Completo vale a pena.</p>
+      <div class="pergunta" data-campo="empreiteiros">
+        <p class="rot">Você trabalha com empreiteiros ou paga por medição?</p>
+        <div class="opcoes duas"><button type="button" data-valor="Sim">Sim</button><button type="button" data-valor="Não">Não</button></div>
+      </div>
+      <div class="pergunta" data-campo="cnpjs">
+        <p class="rot">Você tem mais de uma empresa (CNPJ)?</p>
+        <div class="opcoes duas"><button type="button" data-valor="Sim">Sim</button><button type="button" data-valor="Não">Não</button></div>
+      </div>
+      <div class="pergunta" data-campo="interesse">
+        <p class="rot">O que você quer agora?</p>
+        <div class="opcoes">
+          <button type="button" data-valor="Começar o teste grátis">Começar o teste grátis</button>
+          <button type="button" data-valor="Ver uma demonstração com alguém">Ver uma demonstração com alguém</button>
+          <button type="button" data-valor="Já quero contratar">Já quero contratar</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 5 · contato -->
+    <fieldset class="passo" data-passo="5" hidden>
+      <legend>Para onde mandamos o resultado?</legend>
+      <p class="porque">Último passo. Seus dados são usados só para falar com você sobre o Obrativa.</p>
+      <div class="campos">
+        <label class="campo"><span>Seu nome</span><input name="nome" autocomplete="name" required maxlength="120"></label>
+        <label class="campo"><span>Empresa <small>(opcional)</small></span><input name="empresa" autocomplete="organization" maxlength="120"></label>
+        <label class="campo"><span>WhatsApp com DDD</span><input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(31) 99999-9999" maxlength="16"></label>
+        <label class="campo"><span>E-mail</span><input name="email" type="email" inputmode="email" autocomplete="email" required maxlength="120"></label>
+        <label class="campo"><span>Cidade / UF <small>(opcional)</small></span><input name="cidade" autocomplete="address-level2" placeholder="Ex.: Belo Horizonte / MG" maxlength="80"></label>
+        <label class="armadilha" aria-hidden="true">Não preencha<input name="site" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <label class="check"><input type="checkbox" name="novidades"> Quero receber novidades e dicas de gestão financeira de obras</label>
+      <p class="lgpd">Ao enviar, você concorda em receber o contato da equipe Obrativa sobre este pedido. Não compartilhamos seus dados. Veja a <a href="privacidade.html">Política de privacidade</a>.</p>
+    </fieldset>
+
+    <p class="erro" id="erro" role="alert" hidden></p>
+    <div class="botoes">
+      <button type="button" class="btn fant" id="voltar" hidden>← Voltar</button>
+      <button type="button" class="btn prim" id="avancar">Continuar</button>
+    </div>
+  </form>
+
+  <!-- Resultado -->
+  <section class="cartao resultado" id="resultado" hidden aria-live="polite">
+    <p class="sobretitulo">Seu resultado</p>
+    <h2>Plano recomendado: <span id="r-plano">Gestão</span></h2>
+    <p id="r-porque" class="lead"></p>
+    <div class="r-preco">
+      <span class="riscado" id="r-regular">R$ 199,90</span>
+      <b id="r-promo">R$ 149,90</b><span>por mês</span>
+    </div>
+    <p class="r-dia" id="r-dia">cerca de R$ 5,00 por dia, nos primeiros 12 meses</p>
+    <p class="promo-linha" data-promo>Preço especial de lançamento para quem assinar até 31/01/2027. <span data-contador></span></p>
+    <div class="botoes">
+      <a class="btn prim" id="r-teste" href="https://eagleaiagency.github.io/obrativa.github.io/?plano=gestao">Começar o teste grátis de 7 dias</a>
+      <a class="btn fant" href="./#planos">Comparar os planos</a>
+    </div>
+    <p class="r-envio" id="r-envio"></p>
+  </section>
+</main>
+
+<footer class="pe"><div class="envelope"><span>© 2026 Obrativa</span><nav><a href="privacidade.html">Política de privacidade</a> · <a href="termos.html">Termos de serviço</a> · <a href="mailto:contact.eagleai@gmail.com">contact.eagleai@gmail.com</a></nav></div></footer>
+<script src="assets/diagnostico.js" defer></script>
+</body>
+</html>
