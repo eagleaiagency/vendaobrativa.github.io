@@ -249,6 +249,20 @@ p { margin: 0; text-wrap: pretty; }
 .funcao li { display: flex; gap: 10px; font-size: 16px; }
 .funcao li .icone { color: var(--musgo); margin-top: 3px; width: 18px; height: 18px; }
 .plano-tag { display: inline-block; margin-top: 18px; font-size: 13px; font-weight: 600; color: var(--tinta-2); padding: 3px 10px; border: 1px solid var(--filete-forte); border-radius: 999px; background: var(--papel); }
+.visao { background: var(--papel); border-top: 1px solid var(--filete); border-bottom: 1px solid var(--filete); }
+.visao h2 { max-width: 22ch; }
+.visao h2 em { font-style: normal; color: var(--tinta-2); }
+.visao .lead { max-width: 62ch; }
+.modulos { margin-top: clamp(28px, 4vw, 44px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.modulo { border: 1px solid var(--filete); border-radius: 12px; padding: 18px 18px 20px; background: var(--cal); display: flex; flex-direction: column; gap: 8px; }
+.modulo b { font-size: 17px; font-weight: 650; line-height: 1.25; }
+.modulo p { margin: 0; font-size: 15px; color: var(--tinta-2); }
+.modulo-selo { align-self: flex-start; font-size: 12px; font-weight: 650; letter-spacing: 0.03em; padding: 2px 9px; border-radius: 999px; border: 1px dashed var(--filete-forte); color: var(--tinta-2); }
+.modulo.atual { border-color: var(--preto); box-shadow: inset 0 3px 0 var(--amarelo); }
+.modulo.atual .modulo-selo { border-style: solid; background: var(--preto); border-color: var(--preto); color: var(--amarelo); }
+.visao .mini { margin-top: 16px; font-size: 13px; color: var(--tinta-3); }
+@media (max-width: 980px) { .modulos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .modulos { grid-template-columns: 1fr; } }
 .mais-funcoes { margin-top: clamp(32px, 4vw, 48px); display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--preto); }
 .mais-funcoes div { padding: 22px 24px 22px 0; border-bottom: 1px solid var(--filete); }
 .mais-funcoes div:not(:nth-child(3n + 1)) { padding-left: 24px; border-left: 1px solid var(--filete); }
@@ -311,7 +325,7 @@ p { margin: 0; text-wrap: pretty; }
 .fundador-foto { margin: 0; position: relative; }
 .fundador-foto img { display: block; width: 100%; height: auto; aspect-ratio: 630 / 840; object-fit: cover; border-radius: 14px; box-shadow: var(--sombra-painel); }
 .fundador-foto::after { content: ''; position: absolute; left: -12px; bottom: -12px; width: 38%; height: 12px; background: var(--amarelo); border-radius: 3px; }
-.fundador .sobretitulo, .por-dia .sobretitulo { font-size: 14px; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-2); margin: 0 0 10px; }
+.fundador .sobretitulo, .por-dia .sobretitulo, .visao .sobretitulo { font-size: 14px; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tinta-2); margin: 0 0 10px; }
 .fundador h2 { margin: 0 0 18px; }
 .fundador h2 em { font-style: normal; color: var(--tinta-2); }
 .fundador-texto > p { color: var(--tinta-2); max-width: 62ch; }
@@ -658,6 +672,20 @@ p { margin: 0; text-wrap: pretty; }
       <figure class="tela" style="margin:0"><picture><source media="(max-width: 760px)" srcset="assets/tela-pagar-movel.webp" width="750" height="938"><img src="assets/tela-pagar.webp" width="1600" height="1000" loading="lazy" alt="A pagar no Obrativa: total em aberto, o que já venceu e o que vence nos próximos 30 dias."></picture></figure>
     </article>
 
+    <article class="funcao inverte">
+      <div class="texto">
+        <h3>Quanto ainda posso gastar nesta obra?</h3>
+        <p>Defina no contrato o máximo para materiais, mão de obra e outras despesas. O app soma sozinho o que já foi pago, com rateios e encargos, e avisa antes de passar do limite. A margem planejada fica à vista do começo ao fim.</p>
+        <ul>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Avisos em 80% e 90% do limite, sem bloquear nenhum pagamento</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Aditivo mudou o contrato? Mantém ou revisa os percentuais, com o histórico guardado</li>
+          <li><svg class="icone" aria-hidden="true"><use href="#i-check"/></svg>Obras concluídas viram referência: o app sugere os percentuais das próximas</li>
+        </ul>
+        <span class="plano-tag">No Gestão e no Completo</span>
+      </div>
+      <figure class="tela" style="margin:0"><picture><source media="(max-width: 760px)" srcset="assets/tela-margem-movel.webp" width="750" height="938"><img src="assets/tela-margem.webp" width="1600" height="1000" loading="lazy" alt="Previsto × realizado no Obrativa: limite de materiais, mão de obra e outras despesas, quanto já foi gasto, uso de cada limite e a margem planejada."></picture></figure>
+    </article>
+
     <div class="mais-funcoes">
       <div><b>Extrato do banco importado</b><span>OFX, CSV ou PDF, como o banco entrega. O app sugere favorecido e categoria pelo que você já lançou; você confere antes de gravar.</span></div>
       <div><b>Aditivos de contrato</b><span>O valor da obra se atualiza; o que já foi recebido não muda.</span></div>
@@ -701,6 +729,21 @@ p { margin: 0; text-wrap: pretty; }
       <p class="fundador-assinatura">Obrativa · criado por quem conhece a realidade das obras.</p>
       <div class="cta-linha"><a class="btn prim" href="diagnostico.html">Quero organizar minhas obras</a></div>
     </div>
+  </div>
+</section>
+
+<section class="secao visao" id="visao" aria-labelledby="t-visao">
+  <div class="envelope">
+    <p class="sobretitulo">Para onde o Obrativa vai</p>
+    <h2 id="t-visao">Mais do que gerir suas obras. <em>Aprenda a conduzi-las com a experiência de quem vive a construção.</em></h2>
+    <p class="lead">O lançamento começa pelo financeiro. Os próximos módulos juntam gestão, conhecimento técnico e orientação especializada no mesmo aplicativo, com acesso conforme o plano.</p>
+    <div class="modulos">
+      <div class="modulo atual"><span class="modulo-selo">Disponível</span><b>Obrativa Financeiro</b><p>Fluxo de caixa, contas a pagar e a receber, custos por obra, rateios, empreitadas e previsto × realizado.</p></div>
+      <div class="modulo"><span class="modulo-selo">Próximo módulo</span><b>Obrativa Gestão de Obras</b><p>Equipamentos e locações, movimentações, documentos, procedimentos e acompanhamento operacional.</p></div>
+      <div class="modulo"><span class="modulo-selo">Em preparação</span><b>Obrativa Conhecimento e Mentoria</b><p>Orientações técnicas, modelos de documentos e situações práticas, da visita técnica à entrega da obra, com encontros coletivos com o especialista.</p></div>
+      <div class="modulo"><span class="modulo-selo">Em planejamento</span><b>Obrativa Orçamentos</b><p>Composições unitárias, histórico de custos da própria empresa, BDI, propostas comerciais e cronograma físico-financeiro.</p></div>
+    </div>
+    <p class="mini">Os módulos futuros ainda não têm data nem preço definidos. Quando chegarem, quem já é cliente fica sabendo primeiro.</p>
   </div>
 </section>
 
